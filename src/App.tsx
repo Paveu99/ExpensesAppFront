@@ -1,8 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import {ExpenseEntity} from 'types'
 function App() {
+
+  const cosiek: ExpenseEntity = {
+    category: 'ja',
+    name: 'sad',
+    cost: 1123.4,
+    month: 'sad'
+  }
+
   return (
     <div className="App">
       <header className="App-header">
