@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import {ExpenseEntity} from 'types'
+import './style.scss'
 function App() {
 
   const cosiek: ExpenseEntity = {
