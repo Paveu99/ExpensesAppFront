@@ -18,6 +18,9 @@
     height: 40px;
     border-radius: 10px
   }
+  &__link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
   .title {
     text-transform: uppercase;
     background-image: linear-gradient(
