@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {NavLink} from "react-router-dom"
 import "../styles/Header.scss";
 import el1 from '../styles/images/Home.png';
@@ -15,24 +15,25 @@ export const Header = () => {
             backgroundColor: isActive ? "#323232" : '',
         }
     )
-  return <header className="nav">
-      <h1 className="title">EXPENSE APP</h1>
-      <NavLink className="nav__link" style={styleOfLink} to="/">
-          <img className="small-icon" src={el1} alt=""/>
-          <p className="text">Main</p>
-      </NavLink>
-      <NavLink className="nav__link" style={styleOfLink} to="/info">
-          <img className="small-icon" src={el2} alt=""/>
-          <p className="text">Information</p>
-      </NavLink>
-      <NavLink className="nav__link" style={styleOfLink} to="/creator">
-          <img className="small-icon" src={el4} alt=""/>
-          <p className="text">Creator</p>
-      </NavLink>
-      <NavLink className="nav__link" style={styleOfLink} to="/details">
-          <img className="small-icon" src={el3} alt=""/>
-          <p className="text">Details</p>
-      </NavLink>
-      <button className="add-form-button">+ New expense</button>
-  </header>
+
+  return <header className='nav'>
+          <h1 className="title">EXPENSE APP</h1>
+          <NavLink className="nav__link" style={styleOfLink} to="/">
+              <img className="small-icon" src={el1} alt=""/>
+              <p className="text">Main</p>
+          </NavLink>
+          <NavLink className="nav__link" style={styleOfLink} to="/info">
+              <img className="small-icon" src={el2} alt=""/>
+              <p className="text">Information</p>
+          </NavLink>
+          <NavLink className="nav__link" style={styleOfLink} to="/creator">
+              <img className="small-icon" src={el4} alt=""/>
+              <p className="text">Creator</p>
+          </NavLink>
+          <NavLink className="nav__link" style={styleOfLink} to="/details">
+              <img className="small-icon" src={el3} alt=""/>
+              <p className="text">Details</p>
+          </NavLink>
+          <button className="add-form-button">+ New expense</button>
+      </header>
 }
