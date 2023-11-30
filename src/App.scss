@@ -1,0 +1,50 @@
+.App {
+  display: flex;
+  /*flex-direction: row;*/
+}
+
+.content {
+  flex-grow: 1;
+  padding-left: 30px;
+  //margin-left: 270px;
+  overflow-y: auto;
+  color: white;
+}
+
+.navbar {
+  background-color: #333;
+  width: 250px;
+  color: white;
+  height: 100vh;
+  transition: 0.5s ease;
+}
+
+.navbar.hidden {
+  width: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.test-button {
+  margin-top: 5px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  background-color: transparent;
+  border: none;
+  width: 45px;
+}
+
+.test-button:hover {
+  cursor: pointer;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.icon-inside {
+  width: 70%;
+}
