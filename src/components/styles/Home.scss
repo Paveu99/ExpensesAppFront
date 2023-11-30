@@ -1,0 +1,41 @@
+.home-view {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.home-title {
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.home {
+  height: 100vh;
+  font-weight: bold;
+  display: grid;
+  grid-template: 1fr 1fr/1fr 1fr 1fr;
+  grid-template-areas:
+    "first first lottie"
+    "second third fourth";
+  font-size: 80px;
+}
+.e1 {
+  display: flex;
+  align-items: center;
+  grid-area: first;
+  text-transform: uppercase;
+}
+.e2 {grid-area: lottie}
+.e3 {
+  grid-area: second;
+  font-size: 30px;
+}
+.e4 {
+  grid-area: third;
+  font-size: 30px;
+}
+.e5 {
+  grid-area: fourth;
+  font-size: 30px;
+}
