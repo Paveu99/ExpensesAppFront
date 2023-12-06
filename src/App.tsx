@@ -9,7 +9,7 @@ import {DetailedPage} from "./views/DetailedPage";
 import el from './components/styles/images/Menu.png';
 export const App = () => {
 
-    const [isNavbarHidden, setIsNavbarHidden] = useState<boolean>(false);
+    const [isNavbarHidden, setIsNavbarHidden] = useState<boolean>(true);
 
     const toggleNavbar = () => {
         setIsNavbarHidden(!isNavbarHidden);
