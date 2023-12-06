@@ -7,11 +7,7 @@ import "../components/styles/Home.scss"
 export const HomePage = () => {
 
   const variantsLeft = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0 },
-  };
-  const variantsRight = {
-    hidden: { opacity: 0, x: 10 },
+    hidden: { opacity: 0, x: -20 },
     visible: { opacity: 1, x: 0 },
   };
 
