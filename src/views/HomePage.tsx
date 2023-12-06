@@ -24,20 +24,52 @@ export const HomePage = () => {
     },
   };
 
+  const red = <span className="e1__red">100000$</span>
+
   return <div className="home-view">
-    {/*<h2 className="home-title">Hello there! What are we counting today?</h2>*/}
-    <motion.div
+    <div
         className="home"
-        initial="hidden"
-        animate="visible"
-        variants={variantsLeft}
-        transition={{ duration: 2 }}
     >
-      <div className="e1">So far you have spent 100000$ this year</div>
-      <div className="e2" style={{width: "80%", pointerEvents: "none"}}><Lottie options={defaultOptions}/></div>
-      <div className="e3">You spend the most money on: Food</div>
-      <div className="e4">Month when you spend the most amount of money was: December</div>
-      <div className="e5">Your last purchase was: Kebab </div>
-    </motion.div>
+      <motion.div
+          className="e1"
+          initial="hidden"
+          animate="visible"
+          variants={variantsLeft}
+          transition={{ duration: 2 }}
+      >
+        So far you have spent: {red} this year
+      </motion.div>
+      <div className="e2" style={{pointerEvents: "none"}}>
+        <div className="e2__lottie">
+          <Lottie
+              options={defaultOptions}
+          />
+        </div>
+      </div>
+      <motion.div
+          className="e3"
+          initial="hidden"
+          animate="visible"
+          variants={variantsLeft}
+          transition={{ duration: 2, delay: 1}}
+      >You spend the most money on: <div style={{"color": "red"}}>Food</div>
+      </motion.div>
+      <motion.div
+          className="e4"
+          initial="hidden"
+          animate="visible"
+          variants={variantsLeft}
+          transition={{ duration: 2, delay: 1 }}
+      >Month when you spend the most amount of money was: <br/><div style={{"color": "red"}}>December</div>
+      </motion.div>
+      <motion.div
+          className="e5"
+          initial="hidden"
+          animate="visible"
+          variants={variantsLeft}
+          transition={{ duration: 2, delay: 1 }}
+      >Your last purchase was: <div style={{"color": "red"}} >Kebab</div>
+      </motion.div>
+    </div>
   </div>
 }
