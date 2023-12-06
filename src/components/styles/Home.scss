@@ -14,6 +14,7 @@
   height: 100vh;
   font-weight: bold;
   display: grid;
+  grid-gap: 15px;
   grid-template: 1fr 1fr/1fr 1fr 1fr;
   grid-template-areas:
     "first first lottie"
@@ -21,12 +22,23 @@
   font-size: 80px;
 }
 .e1 {
-  display: flex;
-  align-items: center;
+  flex-wrap: inherit;
   grid-area: first;
   text-transform: uppercase;
+  margin: auto 0 auto 0;
+  &__red {
+    color: red;
+  }
 }
-.e2 {grid-area: lottie}
+.e2 {
+  display: flex;
+  grid-area: lottie;
+  justify-content: center;
+  align-items: center;
+  &__lottie {
+    transform: scale(0.9);
+  }
+}
 .e3 {
   grid-area: second;
   font-size: 30px;
