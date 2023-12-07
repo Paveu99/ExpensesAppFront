@@ -22,8 +22,7 @@ export const HomePage = () => {
 
   const red = <span className="e1__red">100000$</span>
 
-  return <div className="home-view">
-    <div
+  return <div
         className="home"
     >
       <motion.div
@@ -67,5 +66,4 @@ export const HomePage = () => {
       >Your last purchase was: <div style={{"color": "red"}} >Kebab</div>
       </motion.div>
     </div>
-  </div>
 }
