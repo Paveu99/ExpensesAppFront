@@ -22,7 +22,7 @@ export const MouseGradientText = (props: Props) => {
         return () => {
             document.removeEventListener('mousemove', handleMouseMove);
         };
-    }, []); // Dodaj [] jako drugi argument, aby efekt działał tylko po zamontowaniu komponentu
+    }, []);
 
     const calculateGradient = (): string => {
         const xPercentage = (mousePosition.x / window.innerWidth) * 100;
