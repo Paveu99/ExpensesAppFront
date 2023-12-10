@@ -3,45 +3,18 @@ import '../components/styles/Creator.scss'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import '../components/styles/Creator.scss'
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import {Keyboard, Mousewheel, Pagination} from 'swiper/modules';
-
-interface AnimatedSlideProps {
-    children: React.ReactNode;
-}
-
-const AnimatedSlide = (children: AnimatedSlideProps ) => {
-    const [ref, inView] = useInView({
-        triggerOnce: true,
-    });
-
-    const variants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0 },
-    };
-
-    return (
-        <motion.div
-            ref={ref}
-            initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
-            variants={variants}
-            transition={{ duration: 2 }}
-        >
-            {children.children}
-        </motion.div>
-    );
-};
+import {AnimatedSlide} from "../components/slides/AnimatedSlide";
+import img1 from "../components/styles/images/Paweł Jarecki - photo.jpg"
+import img2 from "../components/styles/images/4672500.png"
+import img3 from "../components/styles/images/Profile.jpg"
 
 export const CreatorPage = () => {
     return <div className="creator">
             <Swiper
                 modules={[Mousewheel, Pagination, Keyboard]}
-                direction={'horizontal'}
+                direction={'vertical'}
                 slidesPerView={1}
-                spaceBetween={30}
                 mousewheel={true}
                 keyboard
                 pagination={{
@@ -49,9 +22,47 @@ export const CreatorPage = () => {
                 }}
                 className="mySwiper"
             >
-                <SwiperSlide><AnimatedSlide>Hejka</AnimatedSlide></SwiperSlide>
-                <SwiperSlide><AnimatedSlide>Stulejka</AnimatedSlide></SwiperSlide>
-                <SwiperSlide><AnimatedSlide>E;p</AnimatedSlide></SwiperSlide>
+                <SwiperSlide>
+                    <AnimatedSlide>
+                        <div className="about">
+                            <img className="profile-img" src={img1} alt="Profile picture"/>
+                            <div className="description">
+                                <h2 className="intro">Hi it's me!</h2>
+                                <p>
+                                    Hi, I am graduate from Wroclaw University of Science and Technology, who is very passionate about new technologies and programming.
+                                    I am working as a Technology Analyst at UBS.
+                                    My preferable choice of programming language is JavaScript/TypeScript. I love working with React and MySQL, with which I created couple of projects that you can view on my GitHub repository.
+                                </p>
+                            </div>
+                        </div>
+                    </AnimatedSlide>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <AnimatedSlide>
+                        <div className="about">
+                            <img className="gmail-img" src={img2} alt="Gmail picture"/>
+                            <div className="description">
+                                <h2 className="intro">Contact?</h2>
+                                <p>
+                                    Here is my email address:
+                                    <br/>
+                                    <a href="mailto:paweljarecki10@gmail.com?subject=Question&body=Description">paweljarecki10@gmail.com</a>
+                                </p>
+                            </div>
+                        </div>
+                    </AnimatedSlide>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <AnimatedSlide>
+                        <div className="about">
+                            <img className="github-img" src={img3} alt="Github profile"/>
+                            <div className="description">
+                                <h2 className="intro">My repo!</h2>
+                                <p>Here is a link to my GitHub repository in case you would like to see a little bit more of my projects. Hope you will find inspiration or help over there.</p>
+                            </div>
+                        </div>
+                    </AnimatedSlide>
+                </SwiperSlide>
             </Swiper>
         </div>
 };
