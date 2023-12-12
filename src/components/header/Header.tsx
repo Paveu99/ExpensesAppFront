@@ -6,7 +6,11 @@ import el2 from '../styles/images/Info.png';
 import el3 from '../styles/images/Details.png';
 import el4 from '../styles/images/user.png';
 import {MouseGradientText} from "./Gradient";
+import {AddExpenseView} from "../../views/AddView";
 export const Header = () => {
+
+    const [openModal, setOpenModal] = useState<boolean>(false)
+
     const styleOfLink = ({isActive}: {
                              isActive: boolean
                          }
@@ -35,6 +39,7 @@ export const Header = () => {
           <img className="small-icon" src={el3} alt=""/>
           <p className="text">Details</p>
       </NavLink>
-      <button className="add-form-button">+ New expense</button>
+      <button className="add-form-button" onClick={() => setOpenModal(true)}>+ New expense</button>
+      <AddExpenseView isOpen={openModal} onClose={() => setOpenModal(false)}></AddExpenseView>
       </header>
 }
