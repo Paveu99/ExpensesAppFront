@@ -1,6 +1,7 @@
 import {animated, useSpring, useTransition} from "@react-spring/web";
 import React, {useEffect} from "react";
 import "../components/styles/AddView.scss"
+import {AddRecordForm} from "../components/expenses/AddExpense";
 interface Props {
     isOpen: boolean,
     onClose: () => void
@@ -49,7 +50,7 @@ export const AddExpenseView = (props: Props) => {
                     </header>
                     <hr/>
                     <div className="expense-form">
-
+                        <AddRecordForm/>
                     </div>
                 </div>
             </animated.div>
