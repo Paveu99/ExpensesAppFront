@@ -1,4 +1,4 @@
-import React, {FormEvent, useState} from 'react';
+import React, {FormEvent, useEffect, useState} from 'react';
 import {useRecordContext} from "../context/RecordContext";
 import {AddNewExpense} from 'types'
 import '../styles/AddExpense.scss'
@@ -33,7 +33,6 @@ export const AddExpenseForm: React.FC = () => {
         month: '',
         notes: '',
     });
-
     const [correctName, setCorrectName] = useState<boolean>(false);
     const [correctCategory, setCorrectCategory] = useState<boolean>(false);
     const [correctCost, setCorrectCost] = useState<boolean>(false);
@@ -58,7 +57,6 @@ export const AddExpenseForm: React.FC = () => {
         if (key === 'month') {
             setCorrectMonth(!!value);
         }
-        console.log(value)
     };
 
     const checkInput = async (e: FormEvent) => {
@@ -68,8 +66,7 @@ export const AddExpenseForm: React.FC = () => {
 
         console.log(correctName, correctCost, correctMonth)
 
-        if (correctCost && correctMonth && correctName) {
-            setCorrectAll(true);
+        if (correctAll) {
             try {
                 const res = await fetch('http://localhost:3001/expenses', {
                     method: 'POST',
@@ -96,8 +93,20 @@ export const AddExpenseForm: React.FC = () => {
             cost: 0,
             month: '',
             notes: '',
-        })
+        });
+        setCorrectName(false);
+        setCorrectCategory(false);
+        setCorrectCost(false);
+        setCorrectMonth(false);
+        setCorrectAll(false);
     }
+    useEffect(() => {
+        if (correctName && correctMonth && correctCost && correctCategory) {
+            setCorrectAll(true);
+        } else {
+            setCorrectAll(false);
+        }
+    }, [correctName, correctMonth, correctCost, correctCategory]);
 
     return (
         <form autoComplete='off' className="form" onSubmit={checkInput}>
@@ -191,7 +200,7 @@ export const AddExpenseForm: React.FC = () => {
                     onChange={e => change('notes', e.target.value)}/>
             </div>
             <div className="buttons">
-                <button type="submit" className="buttons__add">Add expense</button>
+                <button type="submit" className={correctAll ? "buttons__add": "buttons__add-disabled"}>Add expense</button>
                 <button className="buttons__reset" onClick={addAnotherOneFromScratch}>Reset</button>
             </div>
         </form>
