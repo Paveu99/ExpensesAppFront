@@ -1,8 +1,16 @@
 import React, {FormEvent, useState} from 'react';
 import {useRecordContext} from "../context/RecordContext";
 import {AddNewExpense} from 'types'
+import '../styles/AddExpense.scss'
+import el1 from '../styles/images/Name.png';
+import el2 from '../styles/images/Category.png';
+import el3 from '../styles/images/Cost.png';
+import el4 from '../styles/images/Date.png';
+import el5 from '../styles/images/Note.png';
+import el6 from '../styles/images/AddImage.png'
+import el7 from '../styles/images/Check.png'
 
-export const AddRecordForm: React.FC = () => {
+export const AddExpenseForm: React.FC = () => {
     const {fetchRecords} = useRecordContext();
 
     const categories: string[] = [
@@ -19,7 +27,7 @@ export const AddRecordForm: React.FC = () => {
     ]
 
     const [form, setForm] = useState<AddNewExpense>({
-        category: 'Food',
+        category: '',
         name: '',
         cost: 0,
         month: '',
@@ -27,6 +35,7 @@ export const AddRecordForm: React.FC = () => {
     });
 
     const [correctName, setCorrectName] = useState<boolean>(false);
+    const [correctCategory, setCorrectCategory] = useState<boolean>(false);
     const [correctCost, setCorrectCost] = useState<boolean>(false);
     const [correctMonth, setCorrectMonth] = useState<boolean>(false);
     const [correctAll, setCorrectAll] = useState<boolean>(false);
@@ -39,6 +48,9 @@ export const AddRecordForm: React.FC = () => {
         }))
         if (key === 'name') {
             setCorrectName(value.length > 0);
+        }
+        if (key === 'category') {
+            setCorrectCategory(categories.includes(value));
         }
         if (key === 'cost') {
             setCorrectCost(value > 0);
@@ -79,7 +91,7 @@ export const AddRecordForm: React.FC = () => {
 
     const addAnotherOneFromScratch = () => {
         setForm({
-            category: 'Food',
+            category: '',
             name: '',
             cost: 0,
             month: '',
@@ -89,71 +101,99 @@ export const AddRecordForm: React.FC = () => {
 
     return (
         <form autoComplete='off' className="form" onSubmit={checkInput}>
-            {/*{submitted && box}*/}
-            <p>
-                <label>
-                    Name: <br/>
-                    <input
-                        type="text"
-                        name="name"
-                        className="input"
-                        value={form.name}
-                        onChange={e => change('name', e.target.value)}
-                    />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Category: <br/>
-                    <select
-                        name="category"
-                        value={form.category}
-                        onChange={e => change('category', e.target.value)}>
-                        {categories.map((category) => {
-                            return (<option value={category}>{category}</option>)
-                        })}
-                    </select>
-                </label>
-            </p>
-            <p>
-                <label>
-                    Cost: <br/>
-                    <input
-                        name="cost"
-                        type="number"
-                        className="number-input"
-                        value={form.cost}
-                        onChange={e => change('cost', e.target.value)}
-                    />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Date: <br/>
-                    <input
-                        name="months"
-                        type="date"
-                        className="date-input"
-                        value={form.month}
-                        onChange={e => change('month', e.target.value)}
-                    />
-                </label>
-            </p>
-            <p>
-                <label>
+            <div className="wrapper-div">
+                <div className="wrapper-div__columns">
+                    <div>
+                        <div className="label">
+                            <img className="desc-icon" src={el1} alt=""/>
+                            Name: <br/>
+                        </div>
+                        <div className="check">
+                            <input
+                                type="text"
+                                name="name"
+                                className="form__name input"
+                                value={form.name}
+                                onChange={e => change('name', e.target.value)}
+                            />
+                            {correctName && <img src={el7} className="check__icon" alt=""/>}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="label">
+                            <img className="desc-icon" src={el2} alt=""/>
+                            Category: <br/>
+                        </div>
+                        <div className="check">
+                            <select
+                                className="form__category input"
+                                name="category"
+                                value={form.category}
+                                onChange={e => change('category', e.target.value)}>
+                                <option value="">Choose a category</option>
+                                {categories.map((category) => {
+                                    return (<option value={category}>{category}</option>)
+                                })}
+                            </select>
+                            {correctCategory && <img src={el7} className="check__icon" alt=""/>}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="label">
+                            <img className="desc-icon" src={el3} alt=""/>
+                            Cost: <br/>
+                        </div>
+                        <div className="check">
+                            <input
+                                placeholder=""
+                                min="0"
+                                name="cost"
+                                type="number"
+                                className="form__cost input"
+                                value={form.cost}
+                                onChange={e => change('cost', e.target.value)}
+                            />
+                            {correctCost && <img src={el7} className="check__icon" alt=""/>}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="label">
+                            <img className="desc-icon" src={el4} alt=""/>
+                            Date: <br/>
+                        </div>
+                        <div className="check">
+                            <input
+                                name="months"
+                                type="date"
+                                className="form__date input"
+                                value={form.month}
+                                onChange={e => change('month', e.target.value)}
+                            />
+                            {correctMonth && <img src={el7} className="check__icon" alt=""/>}
+                        </div>
+                    </div>
+                </div>
+                <img src={el6} className="wrapper-div__image" alt=""/>
+            </div>
+            <div>
+                <div className="label">
+                    <img className="desc-icon" src={el5} alt=""/>
                     Notes: <br/>
-                    <textarea
-                        name="notes"
-                        className="textarea-input"
-                        value={form.notes}
-                        rows={13}
-                        cols={81}
-                        style={{resize: "none"}}
-                        onChange={e => change('notes', e.target.value)}/>
-                </label>
-            </p>
-            <button type="submit" className="add-form-button">Add expense</button>
-            <button className="add-form-button" onClick={addAnotherOneFromScratch}>Reset</button>
+                </div>
+                <textarea
+                    placeholder="Add notes"
+                    name="notes"
+                    className="form__notes input"
+                    value={form.notes}
+                    rows={10}
+                    cols={81}
+                    style={{resize: "none"}}
+                    onChange={e => change('notes', e.target.value)}/>
+            </div>
+            <div className="buttons">
+                <button type="submit" className="buttons__add">Add expense</button>
+                <button className="buttons__reset" onClick={addAnotherOneFromScratch}>Reset</button>
+            </div>
         </form>
     );
 };
