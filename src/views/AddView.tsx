@@ -1,7 +1,7 @@
 import {animated, useSpring, useTransition} from "@react-spring/web";
 import React, {useEffect} from "react";
 import "../components/styles/AddView.scss"
-import {AddRecordForm} from "../components/expenses/AddExpense";
+import {AddExpenseForm} from "../components/expenses/AddExpense";
 interface Props {
     isOpen: boolean,
     onClose: () => void
@@ -44,13 +44,13 @@ export const AddExpenseView = (props: Props) => {
                 <div className='react-modal-content'>
                     <header>
                         <div>
-                            <h2 style={{fontWeight: "bold"}}>New Expense</h2>
+                            <h2 style={{fontWeight: "bold", marginTop: "5px", marginBottom: "5px"}}>NEW EXPENSE</h2>
                         </div>
                         <a href='#' className="close" onClick={props.onClose}></a>
                     </header>
                     <hr/>
                     <div className="expense-form">
-                        <AddRecordForm/>
+                        <AddExpenseForm/>
                     </div>
                 </div>
             </animated.div>
