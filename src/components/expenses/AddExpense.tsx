@@ -9,6 +9,7 @@ import el4 from '../styles/images/Date.png';
 import el5 from '../styles/images/Note.png';
 import el6 from '../styles/images/AddImage.png'
 import el7 from '../styles/images/Check.png'
+import el8 from '../styles/images/Alert.png'
 
 export const AddExpenseForm: React.FC = () => {
     const {fetchRecords} = useRecordContext();
@@ -39,6 +40,7 @@ export const AddExpenseForm: React.FC = () => {
     const [correctMonth, setCorrectMonth] = useState<boolean>(false);
     const [correctAll, setCorrectAll] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
+    const [expenseInfo, setExpenseInfo] = useState<string>('')
 
     const change = (key: string, value: any) => {
         setForm(form => ({
@@ -67,6 +69,7 @@ export const AddExpenseForm: React.FC = () => {
         console.log(correctName, correctCost, correctMonth)
 
         if (correctAll) {
+            setSubmitted(true)
             try {
                 const res = await fetch('http://localhost:3001/expenses', {
                     method: 'POST',
@@ -77,14 +80,18 @@ export const AddExpenseForm: React.FC = () => {
                 });
                 const data = await res.json();
                 console.log(data)
+                setExpenseInfo(`${data.name} was successfully added to the database`);
                 fetchRecords();
             } catch (error) {
                 console.error('Error adding record:', error);
-            } finally {
-                setSubmitted(false);
             }
         }
     }
+
+    const addedExpense = <div className="added-expense">
+        <img src={el8} className="desc-icon" alt=""/>
+        <div style={{fontSize: "12px"}}>{expenseInfo}</div>
+    </div>
 
     const addAnotherOneFromScratch = () => {
         setForm({
@@ -99,14 +106,17 @@ export const AddExpenseForm: React.FC = () => {
         setCorrectCost(false);
         setCorrectMonth(false);
         setCorrectAll(false);
+        setSubmitted(false);
     }
+
     useEffect(() => {
         if (correctName && correctMonth && correctCost && correctCategory) {
             setCorrectAll(true);
         } else {
             setCorrectAll(false);
+            setSubmitted(false)
         }
-    }, [correctName, correctMonth, correctCost, correctCategory]);
+    }, [correctName, correctMonth, correctCost, correctCategory, addAnotherOneFromScratch]);
 
     return (
         <form autoComplete='off' className="form" onSubmit={checkInput}>
@@ -119,6 +129,7 @@ export const AddExpenseForm: React.FC = () => {
                         </div>
                         <div className="check">
                             <input
+                                placeholder="Add name"
                                 type="text"
                                 name="name"
                                 className="form__name input"
@@ -184,7 +195,7 @@ export const AddExpenseForm: React.FC = () => {
                 </div>
                 <img src={el6} className="wrapper-div__image" alt=""/>
             </div>
-            <div>
+            <div className="wrapper-div__textarea">
                 <div className="label">
                     <img className="desc-icon" src={el5} alt=""/>
                     Notes: <br/>
@@ -194,7 +205,7 @@ export const AddExpenseForm: React.FC = () => {
                     name="notes"
                     className="form__notes input"
                     value={form.notes}
-                    rows={10}
+                    rows={5}
                     cols={81}
                     style={{resize: "none"}}
                     onChange={e => change('notes', e.target.value)}/>
@@ -202,6 +213,7 @@ export const AddExpenseForm: React.FC = () => {
             <div className="buttons">
                 <button type="submit" className={correctAll ? "buttons__add": "buttons__add-disabled"}>Add expense</button>
                 <button className="buttons__reset" onClick={addAnotherOneFromScratch}>Reset</button>
+                {submitted && addedExpense}
             </div>
         </form>
     );
