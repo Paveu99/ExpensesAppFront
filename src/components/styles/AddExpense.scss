@@ -1,0 +1,229 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  &__name {
+    padding-left: 10px;
+    width: 240px;
+    height: 30px;
+    font-size: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3a3a3a;
+    color: white;
+  }
+  &__name::placeholder {
+    color: white;
+  }
+  &__name:focus::placeholder {
+    color: transparent;
+  }
+  &__category {
+    padding-left: 5px;
+    width: 252px;
+    height: 30px;
+    font-size: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3a3a3a;
+    color: white;
+  }
+  &__cost {
+    padding-left: 10px;
+    width: 240px;
+    height: 30px;
+    font-size: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3a3a3a;
+    color: white;
+  }
+  &__cost::placeholder {
+    color: white;
+  }
+  &__cost:focus::placeholder {
+    color: transparent;
+  }
+  &__date {
+    padding-left: 5px;
+    width: 248px;
+    height: 30px;
+    font-size: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3a3a3a;
+    color: white;
+  }
+  &__notes {
+    width: 98%;
+    height: 100%;
+    padding: 5px;
+    font-size: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3a3a3a;
+    color: white;
+  }
+  &__notes::placeholder {
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  }
+  &__notes:focus::placeholder {
+    color: transparent;
+  }
+}
+
+.input:hover {
+  outline: none;
+  background-color: #777777;
+  caret-color: transparent;
+}
+
+.input:focus {
+  outline: none;
+  background-color: #777777;
+  caret-color: transparent;
+}
+
+.wrapper-div {
+  display: flex;
+  align-items: center;
+  &__columns {
+    width: 50%;
+  }
+  &__image {
+    height: 280px;
+    margin-top: 30px;
+    padding-left: 10px;
+  }
+}
+
+.label {
+  display: flex;
+  width: 300px;
+  align-items: center;
+  margin: 20px 0 5px 0;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  &__add{
+    margin: 5px 5px 5px 0;
+    font-weight: 0;
+    font-size: 15px;
+    background-color: #fff;
+    color: rgb(13, 16, 16);
+    padding: 8px 20px;
+    border-radius: 10px;
+    transition : 1000ms;
+    transform: translateY(0);
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+  }
+
+  &__add:hover{
+    transition : 200ms;
+    transform : translateY(-0px);
+    color: #fff;
+    background-color: #3a3a3a;
+  }
+
+  &__add-disabled{
+    cursor: not-allowed;
+    pointer-events: none;
+    margin: 5px 5px 5px 0;
+    font-weight: 0;
+    font-size: 15px;
+    background-color: #ff0000;
+    color: rgb(13, 16, 16);
+    box-shadow: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    transition : 1000ms;
+    transform: translateY(0);
+    flex-direction: row;
+    align-items: center;
+    border: none;
+  }
+
+  &__reset{
+    margin: 5px;
+    font-weight: 0;
+    font-size: 15px;
+    background-color: #fff;
+    color: rgb(13, 16, 16);
+    padding: 8px 20px;
+    border-radius: 10px;
+    transition : 1000ms;
+    transform: translateY(0);
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+  }
+
+  &__reset:hover{
+    transition : 200ms;
+    transform : translateY(-0px);
+    color: #fff;
+    background-color: #3a3a3a;
+  }
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  &__icon {
+    height: 1.3rem;
+    margin-top: 3px;
+    margin-left: 10px;
+  }
+}
+
+.desc-icon {
+  height: 1.3rem;
+  margin-right: 10px;
+}
+
+.wrapper-div__textarea {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.added-expense {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 20px;
+}
