@@ -49,9 +49,7 @@ export const AddExpenseView = (props: Props) => {
                         <a href='#' className="close" onClick={props.onClose}></a>
                     </header>
                     <hr/>
-                    <div className="expense-form">
-                        <AddExpenseForm/>
-                    </div>
+                    <AddExpenseForm/>
                 </div>
             </animated.div>
         </animated.div>
