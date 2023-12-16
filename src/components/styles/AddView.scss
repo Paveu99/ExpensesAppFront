@@ -13,11 +13,11 @@
 .react-modal-wrapper {
   max-width: 650px;
   margin: 2rem auto;
-  max-height: 1000px;
 }
 
 .react-modal-content {
   display: block;
+  height: 90vh;
   text-align: left;
   position: relative;
   background-color: #171717;
