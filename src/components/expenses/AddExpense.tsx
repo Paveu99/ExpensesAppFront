@@ -10,6 +10,7 @@ import el5 from '../styles/images/Note.png';
 import el6 from '../styles/images/AddImage.png'
 import el7 from '../styles/images/Check.png'
 import el8 from '../styles/images/Alert.png'
+import {motion} from "framer-motion";
 
 export const AddExpenseForm: React.FC = () => {
     const {fetchRecords} = useRecordContext();
@@ -88,10 +89,21 @@ export const AddExpenseForm: React.FC = () => {
         }
     }
 
-    const addedExpense = <div className="added-expense">
-        <img src={el8} className="desc-icon" alt=""/>
-        <div style={{fontSize: "12px"}}>{expenseInfo}</div>
-    </div>
+    const variantsLeft = {
+        hidden: { opacity: 0, x: -5 },
+        visible: { opacity: 1, x: 0 },
+    };
+
+    const addedExpense = <motion.div
+            className="added-expense"
+            initial="hidden"
+            animate="visible"
+            variants={variantsLeft}
+            transition={{duration: 1}}
+        >
+            <img src={el8} className="desc-icon" alt=""/>
+            <div style={{fontSize: "12px"}}>{expenseInfo}</div>
+        </motion.div>
 
     const addAnotherOneFromScratch = () => {
         setForm({
@@ -136,14 +148,24 @@ export const AddExpenseForm: React.FC = () => {
                                 value={form.name}
                                 onChange={e => change('name', e.target.value)}
                             />
-                            {correctName && <img src={el7} className="check__icon" alt=""/>}
-                        </div>
+                            {
+                                correctName &&
+                                <motion.div
+                                initial="hidden"
+                                animate="visible"
+                                variants={variantsLeft}
+                                transition={{duration: 0.8}}
+                                >
+                                <img src={el7} className="check__icon" alt=""/>
+                                </motion.div>
+                            }
                     </div>
-                    <div>
-                        <div className="label">
-                            <img className="desc-icon" src={el2} alt=""/>
-                            Category: <br/>
-                        </div>
+                </div>
+                <div>
+                    <div className="label">
+                        <img className="desc-icon" src={el2} alt=""/>
+                        Category: <br/>
+                    </div>
                         <div className="check">
                             <select
                                 className="form__category input"
@@ -155,33 +177,58 @@ export const AddExpenseForm: React.FC = () => {
                                     return (<option value={category}>{category}</option>)
                                 })}
                             </select>
-                            {correctCategory && <img src={el7} className="check__icon" alt=""/>}
-                        </div>
+                            {
+                                correctCategory &&
+                                <motion.div
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={variantsLeft}
+                                    transition={{duration: 0.8}}
+                                >
+                                    <img src={el7} className="check__icon" alt=""/>
+                                </motion.div>
+                            }
+                </div>
+                </div>
+                <div>
+                    <div className="label">
+                        <img className="desc-icon" src={el3} alt=""/>
+                        Cost: <br/>
                     </div>
-                    <div>
-                        <div className="label">
-                            <img className="desc-icon" src={el3} alt=""/>
-                            Cost: <br/>
-                        </div>
                         <div className="check">
                             <input
-                                placeholder=""
+                                placeholder="Insert a value"
                                 min="0"
                                 name="cost"
                                 type="number"
                                 className="form__cost input"
-                                value={form.cost}
+                                value={form.cost === 0 ? '' : form.cost}
                                 onChange={e => change('cost', e.target.value)}
+                                onClick={() => {
+                                    if (form.cost === 0) {
+                                        change('cost', '');
+                                    }
+                                }}
                             />
-                            {correctCost && <img src={el7} className="check__icon" alt=""/>}
-                        </div>
+                            {
+                                correctCost &&
+                                <motion.div
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={variantsLeft}
+                                    transition={{duration: 0.8}}
+                                >
+                                    <img src={el7} className="check__icon" alt=""/>
+                                </motion.div>
+                    }
+                </div>
+                </div>
+                <div>
+                    <div className="label">
+                        <img className="desc-icon" src={el4} alt=""/>
+                        Date: <br/>
                     </div>
-                    <div>
-                        <div className="label">
-                            <img className="desc-icon" src={el4} alt=""/>
-                            Date: <br/>
-                        </div>
-                        <div className="check">
+                    <div className="check">
                             <input
                                 name="months"
                                 type="date"
@@ -189,15 +236,25 @@ export const AddExpenseForm: React.FC = () => {
                                 value={form.month}
                                 onChange={e => change('month', e.target.value)}
                             />
-                            {correctMonth && <img src={el7} className="check__icon" alt=""/>}
-                        </div>
+                            {
+                                correctMonth &&
+                                <motion.div
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={variantsLeft}
+                                    transition={{duration: 0.8}}
+                                >
+                                    <img src={el7} className="check__icon" alt=""/>
+                                </motion.div>
+                            }
                     </div>
                 </div>
-                <img src={el6} className="wrapper-div__image" alt=""/>
             </div>
-            <div className="wrapper-div__textarea">
-                <div className="label">
-                    <img className="desc-icon" src={el5} alt=""/>
+            <img src={el6} className="wrapper-div__image" alt=""/>
+        </div>
+    <div className="wrapper-div__textarea">
+        <div className="label">
+            <img className="desc-icon" src={el5} alt=""/>
                     Notes: <br/>
                 </div>
                 <textarea
