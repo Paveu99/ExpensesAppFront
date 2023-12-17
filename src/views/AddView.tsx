@@ -44,7 +44,16 @@ export const AddExpenseView = (props: Props) => {
                 <div className='react-modal-content'>
                     <header>
                         <div>
-                            <h2 style={{fontWeight: "bold", marginTop: "5px", marginBottom: "5px"}}>NEW EXPENSE</h2>
+                            <h2 style={
+                                {
+                                    fontWeight: "bold",
+                                    marginTop: "5px",
+                                    marginBottom: "5px",
+                                    background: 'linear-gradient(to right, #00ff00, #ffffff)',
+                                    WebkitBackgroundClip: 'text',
+                                    color: 'transparent',
+                                }
+                            }>NEW EXPENSE</h2>
                         </div>
                         <a href='#' className="close" onClick={props.onClose}></a>
                     </header>
