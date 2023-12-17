@@ -1,5 +1,5 @@
 import React from 'react';
-// import '../components/styles/Info.scss'
+import '../components/styles/Info.scss'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {Keyboard, Mousewheel, Pagination} from 'swiper/modules';
 import 'swiper/css';
@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import {AnimatedSlide} from "../components/slides/AnimatedSlide";
 
 export const InfoPage = () => {
-  return <div className="creator">
+  return <div className="info-page">
     <Swiper
         modules={[Mousewheel, Pagination, Keyboard]}
         direction={'vertical'}
@@ -19,9 +19,9 @@ export const InfoPage = () => {
         }}
         className="mySwiper"
     >
-      <SwiperSlide><AnimatedSlide>Hejka</AnimatedSlide></SwiperSlide>
-      <SwiperSlide><AnimatedSlide>Stulejka</AnimatedSlide></SwiperSlide>
-      <SwiperSlide><AnimatedSlide>E;p</AnimatedSlide></SwiperSlide>
+      <SwiperSlide><AnimatedSlide>What is it really about?</AnimatedSlide></SwiperSlide>
+      <SwiperSlide><AnimatedSlide>Step by step explanation</AnimatedSlide></SwiperSlide>
+      <SwiperSlide><AnimatedSlide>Maybe some sort of videos</AnimatedSlide></SwiperSlide>
     </Swiper>
   </div>
 };
