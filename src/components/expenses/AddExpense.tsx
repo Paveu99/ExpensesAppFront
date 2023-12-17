@@ -35,6 +35,7 @@ export const AddExpenseForm: React.FC = () => {
         month: '',
         notes: '',
     });
+
     const [correctName, setCorrectName] = useState<boolean>(false);
     const [correctCategory, setCorrectCategory] = useState<boolean>(false);
     const [correctCost, setCorrectCost] = useState<boolean>(false);
@@ -63,11 +64,8 @@ export const AddExpenseForm: React.FC = () => {
     };
 
     const checkInput = async (e: FormEvent) => {
-        console.log(form.category, form.name, form.cost, form.month)
         e.preventDefault()
         setSubmitted(true);
-
-        console.log(correctName, correctCost, correctMonth)
 
         if (correctAll) {
             setSubmitted(true)
@@ -80,7 +78,6 @@ export const AddExpenseForm: React.FC = () => {
                     body: JSON.stringify(form),
                 });
                 const data = await res.json();
-                console.log(data)
                 setExpenseInfo(`${data.name} was successfully added to the database`);
                 fetchRecords();
             } catch (error) {
@@ -159,8 +156,8 @@ export const AddExpenseForm: React.FC = () => {
                                 <img src={el7} className="check__icon" alt=""/>
                                 </motion.div>
                             }
+                        </div>
                     </div>
-                </div>
                 <div>
                     <div className="label">
                         <img className="desc-icon" src={el2} alt=""/>
@@ -188,8 +185,8 @@ export const AddExpenseForm: React.FC = () => {
                                     <img src={el7} className="check__icon" alt=""/>
                                 </motion.div>
                             }
-                </div>
-                </div>
+                        </div>
+                    </div>
                 <div>
                     <div className="label">
                         <img className="desc-icon" src={el3} alt=""/>
@@ -221,8 +218,8 @@ export const AddExpenseForm: React.FC = () => {
                                     <img src={el7} className="check__icon" alt=""/>
                                 </motion.div>
                     }
-                </div>
-                </div>
+                        </div>
+                    </div>
                 <div>
                     <div className="label">
                         <img className="desc-icon" src={el4} alt=""/>
@@ -268,9 +265,26 @@ export const AddExpenseForm: React.FC = () => {
                     onChange={e => change('notes', e.target.value)}/>
             </div>
             <div className="buttons">
-                <button type="submit" className={correctAll ? "buttons__add": "buttons__add-disabled"}>Add expense</button>
-                <button className="buttons__reset" onClick={addAnotherOneFromScratch}>Reset</button>
-                {submitted && addedExpense}
+                <button
+                    type="submit"
+                    className={
+                    correctAll
+                        ? "buttons__add"
+                        : "buttons__add-disabled"
+                }
+                >
+                    Add expense
+                </button>
+                <button
+                    className="buttons__reset"
+                    onClick={addAnotherOneFromScratch}
+                >
+                    Reset
+                </button>
+                {
+                    submitted
+                    && addedExpense
+                }
             </div>
         </form>
     );
