@@ -2,11 +2,16 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 import {AddNewExpense} from 'types';
 import {ExpenseEntity} from 'types'
 
-interface Summary {
+interface SummaryMonth {
     sum: number,
-    category: string,
+    categoryMost: string,
+    categoryLeast: string,
     latest: string,
-    month: string
+}
+
+interface Summary extends SummaryMonth {
+    monthMost: string,
+    monthLeast: string,
 }
 
 interface ExpensesGroupedByDate {
@@ -19,7 +24,11 @@ interface RecordContextProps {
     allRecords: ExpenseEntity[];
     groupedByDate: ExpensesGroupedByDate;
     summary: Summary;
+    summaryYear: Summary;
+    summaryMonth: SummaryMonth;
     fetchRecords: () => Promise<void>;
+    fetchYearSummary: (year: string | undefined) => Promise<void>;
+    fetchMonthSummary: (year: string | undefined, month: string | undefined) => Promise<void>;
 }
 
 const RecordContext = createContext<RecordContextProps | undefined>(undefined);
@@ -33,9 +42,25 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
     const [groupedByDate, setGroupedByDate] = useState<ExpensesGroupedByDate>({});
     const [summary, setSummary] = useState<Summary>({
         sum: 0,
-        category: '',
+        categoryMost: '',
+        categoryLeast: '',
         latest: '',
-        month: '',
+        monthMost: '',
+        monthLeast: '',
+    });
+    const [summaryYear, setSummaryYear] = useState<Summary>({
+        sum: 0,
+        categoryMost: '',
+        categoryLeast: '',
+        latest: '',
+        monthMost: '',
+        monthLeast: '',
+    });
+    const [summaryMonth, setSummaryMonth] = useState<SummaryMonth>({
+        sum: 0,
+        categoryMost: '',
+        categoryLeast: '',
+        latest: '',
     });
 
     const fetchRecords = async () => {
@@ -50,12 +75,36 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
             console.error('Error fetching records:', error);
         }
     };
+    const fetchYearSummary = async (year: string | undefined) => {
+        try {
+            // Replace the URL with your actual API endpoint
+            const response = await fetch(`http://localhost:3001/expenses/${year}`);
+            const data = await response.json();
+            setSummaryYear(data.summaryYear);
+        } catch (error) {
+            console.error('Error fetching records:', error);
+        }
+    };
+    const fetchMonthSummary = async (year: string | undefined, month: string | undefined) => {
+        try {
+            // Replace the URL with your actual API endpoint
+            const response = await fetch(`http://localhost:3001/expenses/${year}/${month}`);
+            const data = await response.json();
+            setSummaryMonth(data.summaryMonth);
+        } catch (error) {
+            console.error('Error fetching records:', error);
+        }
+    };
     console.log(groupedByDate)
     const contextValue: RecordContextProps = {
         allRecords,
         groupedByDate,
         summary,
+        summaryYear,
+        summaryMonth,
         fetchRecords,
+        fetchYearSummary,
+        fetchMonthSummary,
     };
 
     return (
