@@ -54,7 +54,7 @@ export const HomePage = () => {
           animate="visible"
           variants={variantsLeft}
           transition={{ duration: 2, delay: 1}}
-      >You spend the most money on: <div style={{"color": "red"}}>{memoizedSummary.category}</div>
+      >You spend the most money on: <div style={{"color": "red"}}>{memoizedSummary.categoryMost}</div>
       </motion.div>
       <motion.div
           className="e4"
@@ -62,7 +62,7 @@ export const HomePage = () => {
           animate="visible"
           variants={variantsLeft}
           transition={{ duration: 2, delay: 1 }}
-      >Month when you spend the most amount of money was: <br/><div style={{"color": "red"}}>{memoizedSummary.month}</div>
+      >Month when you spend the most amount of money was: <br/><div style={{"color": "red"}}>{memoizedSummary.monthMost}</div>
       </motion.div>
       <motion.div
           className="e5"
@@ -70,7 +70,7 @@ export const HomePage = () => {
           animate="visible"
           variants={variantsLeft}
           transition={{ duration: 2, delay: 1 }}
-      >Your last purchase was: <div style={{"color": "red"}} >{summary.latest}</div>
+      >Your latest purchase was: <div style={{"color": "red"}} >{summary.latest}</div>
       </motion.div>
     </div>
 }
