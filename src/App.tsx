@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.scss';
 import {Header} from "./components/header/Header";
 import {Route, Routes} from "react-router-dom";
@@ -31,6 +31,7 @@ export const App = () => {
                     <Route path="/creator" element={<CreatorPage/>}/>
                     <Route path="/details" element={<DetailedPage/>}/>
                     <Route path="/details/:year" element={<DetailedPageYear/>}/>
+                    {/*<Route path="/details/:year/:month" element={<DetailedPageYear/>}/>*/}
                 </Routes>
             </div>
         </RecordProvider>
