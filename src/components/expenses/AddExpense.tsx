@@ -13,7 +13,7 @@ import el8 from '../styles/images/Alert.png'
 import {motion} from "framer-motion";
 
 export const AddExpenseForm: React.FC = () => {
-    const {fetchRecords} = useRecordContext();
+    const {fetchRecords, fetchYearSummary, fetchMonthSummary} = useRecordContext();
 
     const categories: string[] = [
         "Food",
@@ -79,7 +79,11 @@ export const AddExpenseForm: React.FC = () => {
                 });
                 const data = await res.json();
                 setExpenseInfo(`${data.name} was successfully added to the database`);
+                const dateString = data.month;
+                const [year, month, day] = dateString.split('-');
                 fetchRecords();
+                fetchYearSummary(year);
+                fetchMonthSummary(year, month)
             } catch (error) {
                 console.error('Error adding record:', error);
             }
