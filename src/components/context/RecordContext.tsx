@@ -2,8 +2,23 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 import {AddNewExpense} from 'types';
 import {ExpenseEntity} from 'types'
 
+interface Summary {
+    sum: number,
+    category: string,
+    latest: string,
+    month: string
+}
+
+interface ExpensesGroupedByDate {
+    [year: string]: {
+        [month: string]: ExpenseEntity[];
+    };
+}
+
 interface RecordContextProps {
-    records: ExpenseEntity[];
+    allRecords: ExpenseEntity[];
+    groupedByDate: ExpensesGroupedByDate;
+    summary: Summary;
     fetchRecords: () => Promise<void>;
 }
 
@@ -14,21 +29,32 @@ interface RecordProviderProps {
 }
 
 export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
-    const [records, setRecords] = useState<ExpenseEntity[]>([]);
+    const [allRecords, setAllRecords] = useState<ExpenseEntity[]>([]);
+    const [groupedByDate, setGroupedByDate] = useState<ExpensesGroupedByDate>({});
+    const [summary, setSummary] = useState<Summary>({
+        sum: 0,
+        category: '',
+        latest: '',
+        month: '',
+    });
 
     const fetchRecords = async () => {
         try {
             // Replace the URL with your actual API endpoint
             const response = await fetch('http://localhost:3001/expenses');
             const data = await response.json();
-            setRecords(data.allExpenses);
+            setAllRecords(data.allExpenses);
+            setGroupedByDate(data.expensesGroupedByDate);
+            setSummary(data.summary);
         } catch (error) {
             console.error('Error fetching records:', error);
         }
     };
-
+    console.log(groupedByDate)
     const contextValue: RecordContextProps = {
-        records,
+        allRecords,
+        groupedByDate,
+        summary,
         fetchRecords,
     };
 
