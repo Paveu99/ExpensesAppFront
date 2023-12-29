@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import {AddNewExpense} from 'types';
 import {ExpenseEntity} from 'types'
 
 interface SummaryMonth {
@@ -7,11 +6,15 @@ interface SummaryMonth {
     categoryMost: string,
     categoryLeast: string,
     latest: string,
+    maxAmountCat: number,
+    minAmountCat: number,
 }
 
-interface Summary extends SummaryMonth {
+interface Summary extends SummaryMonth{
     monthMost: string,
     monthLeast: string,
+    maxAmountMonth: number,
+    minAmountMonth: number,
 }
 
 interface ExpensesGroupedByDate {
@@ -47,6 +50,10 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         latest: '',
         monthMost: '',
         monthLeast: '',
+        maxAmountMonth: 0,
+        minAmountMonth: 0,
+        maxAmountCat: 0,
+        minAmountCat: 0,
     });
     const [summaryYear, setSummaryYear] = useState<Summary>({
         sum: 0,
@@ -55,12 +62,18 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         latest: '',
         monthMost: '',
         monthLeast: '',
+        maxAmountMonth: 0,
+        minAmountMonth: 0,
+        maxAmountCat: 0,
+        minAmountCat: 0,
     });
     const [summaryMonth, setSummaryMonth] = useState<SummaryMonth>({
         sum: 0,
         categoryMost: '',
         categoryLeast: '',
         latest: '',
+        maxAmountCat: 0,
+        minAmountCat: 0,
     });
 
     const fetchRecords = async () => {
