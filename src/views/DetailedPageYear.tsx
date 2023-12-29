@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {NavLink, useParams} from 'react-router-dom';
 import {useRecordContext} from "../components/context/RecordContext";
 import el1 from "../components/styles/images/Back-arrow.png";
@@ -19,6 +19,40 @@ export const DetailedPageYear = () => {
 
     const months = memoizedData && memoizedData[`${year}`] ? Object.keys(memoizedData[`${year}`]) : [];
 
+    const [isHovered1, setIsHovered1] = useState(false);
+    const [isHovered2, setIsHovered2] = useState(false);
+    const [isHovered3, setIsHovered3] = useState(false);
+    const [isHovered4, setIsHovered4] = useState(false);
+
+    const handleMouseEnter1 = () => {
+        setIsHovered1(true);
+    };
+
+    const handleMouseLeave1 = () => {
+        setIsHovered1(false);
+    };
+    const handleMouseEnter2 = () => {
+        setIsHovered2(true);
+    };
+
+    const handleMouseLeave2 = () => {
+        setIsHovered2(false);
+    };
+    const handleMouseEnter3 = () => {
+        setIsHovered3(true);
+    };
+
+    const handleMouseLeave3 = () => {
+        setIsHovered3(false);
+    };
+    const handleMouseEnter4 = () => {
+        setIsHovered4(true);
+    };
+
+    const handleMouseLeave4 = () => {
+        setIsHovered4(false);
+    };
+
 
     return (
         <div className="detailed-year">
@@ -26,7 +60,7 @@ export const DetailedPageYear = () => {
                 <NavLink className="back-link" to='/details/'>
                     <img className="back-icon" src={el1} alt=""/>
                 </NavLink>
-                <h1>Details for the year {year}</h1>
+                <h1>Details for the year <span style={{color: "#3498db"}}>{year}</span></h1>
             </header>
             <div className="year-content">
                 {months.map((month, index) => (
@@ -50,32 +84,56 @@ export const DetailedPageYear = () => {
                     <hr/>
                     <div className="stat2">
                         <p>Month in which most money was spent:</p>
-                        <div className="stat__value2">
-                            {memoizedYearData.monthMost}
+                        <div className="stat__handler">
+                            <div
+                                className={isHovered1 ? "stat__value2-hovered" : "stat__value2"}
+                                onMouseEnter={handleMouseEnter1}
+                                onMouseLeave={handleMouseLeave1}
+                            >
+                                {isHovered1 ? `${memoizedYearData.maxAmountMonth}$` : memoizedYearData.monthMost}
+                            </div>
                         </div>
                     </div>
                     <div className="stat2">
                         <p>Month in which the least amount of money was spent:</p>
-                        <div className="stat__value2">
-                            {memoizedYearData.monthLeast}
+                        <div className="stat__handler">
+                            <div
+                                className={isHovered2 ? "stat__value2-hovered" : "stat__value2"}
+                                onMouseEnter={handleMouseEnter2}
+                                onMouseLeave={handleMouseLeave2}
+                            >
+                                {isHovered2 ? `${memoizedYearData.minAmountMonth}$` : memoizedYearData.monthLeast}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="stat">
                     <h2 className="stat__title">
-                        Category statistics:
+                    Category statistics:
                     </h2>
                     <hr/>
                     <div className="stat2">
                         <p>Category on which you spend the most money on:</p>
-                        <div className="stat__value2">
-                            {memoizedYearData.categoryMost}
+                        <div className="stat__handler">
+                            <div
+                                className={isHovered3 ? "stat__value2-hovered" : "stat__value2"}
+                                onMouseEnter={handleMouseEnter3}
+                                onMouseLeave={handleMouseLeave3}
+                            >
+                                {isHovered3 ? `${memoizedYearData.maxAmountCat}$` : memoizedYearData.categoryMost}
+                            </div>
                         </div>
                     </div>
                     <div className="stat2">
                         <p>Category on which you spend the least money on:</p>
-                        <div className="stat__value2">
-                            {memoizedYearData.categoryLeast}
+                        <div className="stat__handler">
+                            <div
+                                className={isHovered4 ? "stat__value2-hovered" : "stat__value2"}
+                                onMouseEnter={handleMouseEnter4}
+                                onMouseLeave={handleMouseLeave4}
+                            >
+                                {isHovered4 ? `${memoizedYearData.minAmountCat}$` : memoizedYearData.categoryLeast}
+                            </div>
                         </div>
                     </div>
                 </div>

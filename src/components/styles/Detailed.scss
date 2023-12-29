@@ -54,15 +54,31 @@
     height: 100%;
     color: #1c1c1c;
   }
-  &__value2 {
+  &__handler {
     display: flex;
     justify-content: center;
+  }
+  &__value2 {
     font-size: 30px;
     font-weight: bolder;
-    align-items: center;
     height: 100%;
     color: #1c1c1c;
     margin-bottom: 15px;
+    transform: rotateX(0deg);
+    transition: transform 0.3s ease;
+    width: fit-content;
+  }
+  &__value2-hovered {
+    font-size: 30px;
+    font-weight: bolder;
+    height: 100%;
+    color: white;
+    margin-bottom: 15px;
+    transform: rotateX(360deg);
+    transition: transform 0.3s ease;
+    width: fit-content;
+    padding-left: 100px;
+    padding-right: 100px;
   }
 }
 .stat2 {
