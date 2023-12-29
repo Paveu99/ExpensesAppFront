@@ -22,7 +22,7 @@ export const AddExpenseForm: React.FC = () => {
         "Self-improvement",
         "Recreation",
         "Going out",
-        "Cloths",
+        "Clothes",
         "Hobbies",
         "Transport",
         "Others"
