@@ -2,9 +2,11 @@
   height: 100vh;
   text-align: center;
 }
+
 .title {
   margin-bottom: 5px;
 }
+
 .years-to-choose {
   display: flex;
   flex-direction: row;
@@ -28,6 +30,7 @@
     background-color: rgba(255, 255, 255, 0.44);
   }
 }
+
 .overall-stats {
   display: grid;
   text-align: left;
@@ -44,6 +47,8 @@
   padding: 16px;
   &__title {
     font-size: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px
   }
   &__value {
     display: flex;
@@ -63,9 +68,9 @@
     font-weight: bolder;
     height: 100%;
     color: #1c1c1c;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     transform: rotateX(0deg);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
     width: fit-content;
   }
   &__value2-hovered {
@@ -73,19 +78,25 @@
     font-weight: bolder;
     height: 100%;
     color: white;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     transform: rotateX(360deg);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
     width: fit-content;
     padding-left: 100px;
     padding-right: 100px;
   }
 }
+
 .stat2 {
   display: flex;
   flex-direction: column;
 }
+
 hr {
-  border: 1px solid #ffffff; // Dodaj niestandardowe style dla <hr/>
+  border: 1px solid #ffffff;
   margin: 0;
+}
+
+.in {
+  margin-top: 10px;
 }
