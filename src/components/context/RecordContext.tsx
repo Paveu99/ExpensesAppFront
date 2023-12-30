@@ -6,6 +6,7 @@ interface SummaryMonth {
     categoryMost: string,
     categoryLeast: string,
     latest: string,
+    cost: number,
     maxAmountCat: number,
     minAmountCat: number,
 }
@@ -48,6 +49,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         categoryMost: '',
         categoryLeast: '',
         latest: '',
+        cost: 0,
         monthMost: '',
         monthLeast: '',
         maxAmountMonth: 0,
@@ -60,6 +62,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         categoryMost: '',
         categoryLeast: '',
         latest: '',
+        cost: 0,
         monthMost: '',
         monthLeast: '',
         maxAmountMonth: 0,
@@ -72,6 +75,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         categoryMost: '',
         categoryLeast: '',
         latest: '',
+        cost: 0,
         maxAmountCat: 0,
         minAmountCat: 0,
     });
@@ -108,7 +112,6 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
             console.error('Error fetching records:', error);
         }
     };
-    console.log(groupedByDate)
     const contextValue: RecordContextProps = {
         allRecords,
         groupedByDate,
