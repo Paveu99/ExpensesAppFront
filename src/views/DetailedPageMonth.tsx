@@ -1,8 +1,10 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {NavLink, useParams} from "react-router-dom";
 import el1 from "../components/styles/images/Back-arrow.png";
+import el2 from "../components/styles/images/Date.png";
 import "../components/styles/DetailedMonth.scss"
 import {useRecordContext} from "../components/context/RecordContext";
+import el3 from "../components/styles/images/Cost.png";
 
 export const DetailedPageMonth = () => {
     const { year , month} = useParams<{ year: string, month: string }>();
@@ -114,8 +116,11 @@ export const DetailedPageMonth = () => {
                             <div>
                                 {expense.name}
                             </div>
-                            <div style={{color: "rgba(194,206,217,0.42", fontSize: "12px"}}>
-                                {expense.month}
+                            <div className="date">
+                                <img className="date__icon" src={el2} alt=""/>
+                                <div style={{color: "rgba(194,206,217,0.42", fontSize: "12px"}}>
+                                    {expense.month}
+                                </div>
                             </div>
                         </div>
                         <div className="right" style={{color: "#3498db"}}>

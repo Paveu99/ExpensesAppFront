@@ -128,3 +128,14 @@ hr {
 .right {
   color: #3498db;
 }
+
+.date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &__icon {
+    padding-right: 5px;
+    height: 0.6rem;
+  }
+}
+
