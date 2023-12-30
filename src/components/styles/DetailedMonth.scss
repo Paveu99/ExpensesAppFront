@@ -1,0 +1,130 @@
+.detailed-month {
+  overflow: hidden;
+}
+.month-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-icon {
+  height: 3rem;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.overall-month-stats {
+  display: grid;
+  text-align: left;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 16px;
+  grid-row-gap: 1px;
+}
+
+.month-stat {
+  display: flex;
+  flex-direction: column;
+  background-color: #3498db;
+  border-radius: 8px;
+  padding: 16px;
+  &__title {
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+  &__value {
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bolder;
+    align-items: center;
+    height: 100%;
+    color: #1c1c1c;
+  }
+  &__value-hovered {
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bolder;
+    align-items: center;
+    height: 100%;
+    color: white;
+    transform: rotateX(360deg);
+    transition: transform 0.4s ease;
+  }
+  &__handler {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__value2 {
+    font-size: 12px;
+    font-weight: bolder;
+    height: 100%;
+    padding-top: 10px;
+    padding-left: 20px;
+    color: #1c1c1c;
+    transform: rotateX(0deg);
+    transition: transform 0.4s ease;
+  }
+  &__value2-hovered {
+    font-size: 12px;
+    font-weight: bolder;
+    height: 100%;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 50px;
+    color: white;
+    transform: rotateX(360deg);
+    transition: transform 0.4s ease;
+  }
+}
+.month-stat2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+hr {
+  border: 1px solid #ffffff;
+  margin: 0;
+}
+.cat {
+  padding-top: 10px;
+  font-size: 12px;
+}
+
+.month-content {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin: 30px 16px 16px 16px;
+  grid-row-gap: 1px;
+}
+
+.single-expense {
+  background-color: rgb(56, 56, 56);
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 16px;
+  height: 40px;
+  border-radius: 10px
+}
+
+.single-expense:hover {
+  background-color: rgba(255, 255, 255, 0.44);
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  color: #3498db;
+}
