@@ -73,7 +73,7 @@ export const DetailedPage = () => {
                     </h2>
                     <hr/>
                     <div className="stat2">
-                        <p>Month in which most money was spent:</p>
+                        <div className="in">Month in which most money was spent:</div>
                         <div className="stat__handler">
                             <div
                                 className={isHovered1 ? "stat__value2-hovered" : "stat__value2"}
@@ -85,7 +85,7 @@ export const DetailedPage = () => {
                         </div>
                     </div>
                     <div className="stat2">
-                        <p>Month in which the least amount of money was spent:</p>
+                        <div className="in">Month in which the least amount of money was spent:</div>
                         <div className="stat__handler">
                             <div
                                 className={isHovered2 ? "stat__value2-hovered" : "stat__value2"}
@@ -103,7 +103,7 @@ export const DetailedPage = () => {
                     </h2>
                     <hr/>
                     <div className="stat2">
-                        <p>Category on which you spend the most money on:</p>
+                        <div className="in">Category on which you spend the most money on:</div>
                         <div className="stat__handler">
                             <div
                                 className={isHovered3 ? "stat__value2-hovered" : "stat__value2"}
@@ -115,7 +115,7 @@ export const DetailedPage = () => {
                         </div>
                     </div>
                     <div className="stat2">
-                        <p>Category on which you spend the least money on:</p>
+                        <div className="in">Category on which you spend the least money on:</div>
                         <div className="stat__handler">
                             <div
                                 className={isHovered4 ? "stat__value2-hovered" : "stat__value2"}
