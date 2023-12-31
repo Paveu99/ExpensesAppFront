@@ -4,9 +4,11 @@ import el1 from "../components/styles/images/Back-arrow.png";
 import el2 from "../components/styles/images/Date.png";
 import "../components/styles/DetailedMonth.scss"
 import {useRecordContext} from "../components/context/RecordContext";
-import el3 from "../components/styles/images/Cost.png";
+import ReactPaginate, { ReactJsPaginationProps } from 'react-js-pagination';
+
 
 export const DetailedPageMonth = () => {
+
     const { year , month} = useParams<{ year: string, month: string }>();
 
     const { summaryMonth, groupedByDate, fetchRecords, fetchMonthSummary } = useRecordContext();
@@ -46,6 +48,39 @@ export const DetailedPageMonth = () => {
     const handleMouseLeave3 = () => {
         setIsHovered3(false);
     };
+
+    const calculateRowsPerPage = () => {
+        const windowHeight = window.innerHeight;
+
+        const rowsPerPage = Math.floor((windowHeight - 250  - 46) / 70);
+
+        return rowsPerPage > 0 ? rowsPerPage * 5 : 5;
+    };
+
+    const [rowsPerPage, setRowsPerPage] = useState(calculateRowsPerPage);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setRowsPerPage(calculateRowsPerPage());
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const handlePageChange = (pageNumber: number) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastExpense = currentPage * rowsPerPage;
+    const indexOfFirstExpense = indexOfLastExpense - rowsPerPage;
+    const currentExpenses = singleMonth.slice(indexOfFirstExpense, indexOfLastExpense);
+
 
     return (
         <div className="detailed-month">
@@ -110,7 +145,7 @@ export const DetailedPageMonth = () => {
                 </div>
             </div>
             <div className="month-content">
-                {singleMonth.map((expense, index) =>(
+                {currentExpenses.map((expense, index) =>(
                     <div className="single-expense" key={index}>
                         <div className="left">
                             <div>
@@ -129,6 +164,15 @@ export const DetailedPageMonth = () => {
                     </div>
                 ))}
             </div>
+            <ReactPaginate
+                totalItemsCount={singleMonth.length}
+                itemsCountPerPage={rowsPerPage}
+                onChange={handlePageChange}
+                activePage={currentPage}
+                itemClass="page-item"
+                linkClass="page-link"
+                activeLinkClass="page-link__active"
+            />
         </div>
     )
 }
