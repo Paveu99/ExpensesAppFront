@@ -10,7 +10,10 @@ import el from './components/styles/images/Menu.png';
 import {RecordProvider} from "./components/context/RecordContext";
 import {DetailedPageYear} from "./views/DetailedPageYear";
 import {DetailedPageMonth} from "./views/DetailedPageMonth";
+import { SearchContext } from './components/search/SearchContext';
 export const App = () => {
+
+    const [search, setSearch] = useState('')
 
     const [isNavbarHidden, setIsNavbarHidden] = useState<boolean>(true);
 
@@ -20,22 +23,24 @@ export const App = () => {
 
   return (
     <div className="App">
-        <RecordProvider>
-            <button className="test-button" onClick={toggleNavbar}><img src={el} alt="" className="icon-inside"/></button>
-            <div className={`navbar ${isNavbarHidden ? 'hidden' : ''}`}>
-                <Header/>
-            </div>
-            <div className="content">
-                <Routes>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="/info" element={<InfoPage/>}/>
-                    <Route path="/creator" element={<CreatorPage/>}/>
-                    <Route path="/details" element={<DetailedPage/>}/>
-                    <Route path="/details/:year" element={<DetailedPageYear/>}/>
-                    <Route path="/details/:year/:month" element={<DetailedPageMonth/>}/>
-                </Routes>
-            </div>
-        </RecordProvider>
+        <SearchContext.Provider value={{search, setSearch}}>
+            <RecordProvider>
+                <button className="test-button" onClick={toggleNavbar}><img src={el} alt="" className="icon-inside"/></button>
+                <div className={`navbar ${isNavbarHidden ? 'hidden' : ''}`}>
+                    <Header/>
+                </div>
+                <div className="content">
+                    <Routes>
+                        <Route path="/" element={<HomePage/>}/>
+                        <Route path="/info" element={<InfoPage/>}/>
+                        <Route path="/creator" element={<CreatorPage/>}/>
+                        <Route path="/details" element={<DetailedPage/>}/>
+                        <Route path="/details/:year" element={<DetailedPageYear/>}/>
+                        <Route path="/details/:year/:month" element={<DetailedPageMonth/>}/>
+                    </Routes>
+                </div>
+            </RecordProvider>
+        </SearchContext.Provider>
     </div>
   );
 }
