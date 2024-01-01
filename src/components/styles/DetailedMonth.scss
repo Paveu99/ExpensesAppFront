@@ -89,6 +89,11 @@ hr {
   border: 1px solid #ffffff;
   margin: 0;
 }
+
+.other-hr {
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  margin: 0 16px 0 16px;
+}
 .cat {
   padding-top: 10px;
   font-size: 12px;
@@ -98,7 +103,7 @@ hr {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
-  margin: 30px 16px 16px 16px;
+  margin:16px;
   grid-row-gap: 1px;
 }
 
@@ -168,4 +173,34 @@ hr {
     background-color: #3498db;
     color: white;
   }
+}
+
+.manage {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.select2 {
+  margin-left: 8px;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  width: 75px;
+}
+
+.select2:hover,
+.select2:focus {
+  border-color: #3498db;
+  box-shadow: 0 1px 10px rgba(52, 152, 219, 0.7);
+}
+
+.failure {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
 }
