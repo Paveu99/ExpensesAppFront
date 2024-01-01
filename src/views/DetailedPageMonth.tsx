@@ -1,17 +1,22 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import {NavLink, useParams} from "react-router-dom";
 import el1 from "../components/styles/images/Back-arrow.png";
 import el2 from "../components/styles/images/Date.png";
 import "../components/styles/DetailedMonth.scss"
 import {useRecordContext} from "../components/context/RecordContext";
 import ReactPaginate, { ReactJsPaginationProps } from 'react-js-pagination';
+import {SearchComponent} from "../components/search/SearchComponent";
+import { ExpenseEntity } from "types";
+import {SearchContext} from "../components/search/SearchContext";
 
 
 export const DetailedPageMonth = () => {
 
-    const { year , month} = useParams<{ year: string, month: string }>();
+    const {year, month} = useParams<{ year: string, month: string }>();
 
-    const { summaryMonth, groupedByDate, fetchRecords, fetchMonthSummary } = useRecordContext();
+    const {summaryMonth, groupedByDate, fetchRecords, fetchMonthSummary} = useRecordContext();
+
+    const {search} = useContext(SearchContext)
 
     useEffect(() => {
         fetchRecords();
@@ -26,6 +31,8 @@ export const DetailedPageMonth = () => {
     const [isHovered1, setIsHovered1] = useState(false);
     const [isHovered2, setIsHovered2] = useState(false);
     const [isHovered3, setIsHovered3] = useState(false);
+
+    const [option, setOption] = useState<string>('Old');
 
     const handleMouseEnter1 = () => {
         setIsHovered1(true);
@@ -52,7 +59,7 @@ export const DetailedPageMonth = () => {
     const calculateRowsPerPage = () => {
         const windowHeight = window.innerHeight;
 
-        const rowsPerPage = Math.floor((windowHeight - 250  - 46) / 70);
+        const rowsPerPage = Math.floor((windowHeight - 250 - 46) / 80);
 
         return rowsPerPage > 0 ? rowsPerPage * 5 : 5;
     };
@@ -71,6 +78,59 @@ export const DetailedPageMonth = () => {
         };
     }, []);
 
+    let shownData: ExpenseEntity[] = singleMonth.filter(
+        expense => {
+            return (
+                expense
+                    .name
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
+            )
+        }
+    );
+
+    if (option === "Old") {
+        shownData = shownData.sort(function (a: ExpenseEntity, b: ExpenseEntity) {
+            if (a.month < b.month) {
+                return -1;
+            }
+            if (a.month > b.month) {
+                return 1;
+            }
+            return 0;
+        })
+    } else if (option === "New") {
+        shownData = shownData.sort(function (a: ExpenseEntity, b: ExpenseEntity) {
+            if (a.month < b.month) {
+                return 1;
+            }
+            if (a.month > b.month) {
+                return -1;
+            }
+            return 0;
+        })
+    } else if (option === "A-Z") {
+        shownData = shownData.sort(function (a: ExpenseEntity, b: ExpenseEntity) {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+            return 0;
+        })
+    } else if (option === 'Z-A') {
+        shownData = shownData.sort(function (a: ExpenseEntity, b: ExpenseEntity) {
+            if (a.name < b.name) {
+                return 1;
+            }
+            if (a.name > b.name) {
+                return -1;
+            }
+            return 0;
+        })
+    }
+
     const [currentPage, setCurrentPage] = useState(1);
 
     const handlePageChange = (pageNumber: number) => {
@@ -79,8 +139,44 @@ export const DetailedPageMonth = () => {
 
     const indexOfLastExpense = currentPage * rowsPerPage;
     const indexOfFirstExpense = indexOfLastExpense - rowsPerPage;
-    const currentExpenses = singleMonth.slice(indexOfFirstExpense, indexOfLastExpense);
+    const currentExpenses = shownData.slice(indexOfFirstExpense, indexOfLastExpense);
 
+    const allExpenses =
+        <>
+            <div className="month-content">
+                {currentExpenses.map((expense, index) => (
+                    <div className="single-expense" key={index}>
+                        <div className="left">
+                            <div>
+                                {expense.name}
+                            </div>
+                            <div className="date">
+                                <img className="date__icon" src={el2} alt=""/>
+                                <div style={{color: "rgba(194,206,217,0.42", fontSize: "12px"}}>
+                                    {expense.month}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="right" style={{color: "#3498db"}}>
+                            {expense.cost}$
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <ReactPaginate
+                totalItemsCount={shownData.length}
+                itemsCountPerPage={rowsPerPage}
+                onChange={handlePageChange}
+                activePage={currentPage}
+                itemClass="page-item"
+                linkClass="page-link"
+                activeLinkClass="page-link__active"
+            />
+        </>
+
+    const noResults = <div className="failure">
+        No results
+    </div>
 
     return (
         <div className="detailed-month">
@@ -144,35 +240,19 @@ export const DetailedPageMonth = () => {
                     </div>
                 </div>
             </div>
-            <div className="month-content">
-                {currentExpenses.map((expense, index) =>(
-                    <div className="single-expense" key={index}>
-                        <div className="left">
-                            <div>
-                                {expense.name}
-                            </div>
-                            <div className="date">
-                                <img className="date__icon" src={el2} alt=""/>
-                                <div style={{color: "rgba(194,206,217,0.42", fontSize: "12px"}}>
-                                    {expense.month}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="right" style={{color: "#3498db"}}>
-                            {expense.cost}$
-                        </div>
-                    </div>
-                ))}
+            <div className="manage">
+                <SearchComponent page={() => setCurrentPage(1)}/>
+                <div className="select">
+                    <select className="select2" onChange={(e) => setOption(e.target.value)}>
+                        <option value="Old">Old</option>
+                        <option value="New">New</option>
+                        <option value="A-Z">A-Z</option>
+                        <option value="Z-A">Z-A</option>
+                    </select>
+                </div>
             </div>
-            <ReactPaginate
-                totalItemsCount={singleMonth.length}
-                itemsCountPerPage={rowsPerPage}
-                onChange={handlePageChange}
-                activePage={currentPage}
-                itemClass="page-item"
-                linkClass="page-link"
-                activeLinkClass="page-link__active"
-            />
+            <hr className="other-hr"/>
+            {shownData.length === 0 ? noResults : allExpenses}
         </div>
     )
 }
