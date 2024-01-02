@@ -55,6 +55,7 @@
   "devDependencies": {
     "@types/react-js-pagination": "^3.0.7",
     "@types/react-lottie": "^1.2.10",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "xlsx": "^0.18.5"
   }
 }
