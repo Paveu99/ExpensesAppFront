@@ -2,16 +2,16 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {useRecordContext} from "../components/context/RecordContext";
 import '../components/styles/Detailed.scss';
 import {NavLink} from "react-router-dom";
+import {DownloadButton} from "../components/download/DownloadButton";
 
 export const DetailedPage = () => {
-    const { summary, groupedByDate, fetchRecords } = useRecordContext();
+    const {allRecords, summary, groupedByDate, fetchRecords } = useRecordContext();
 
     useEffect(() => {
     fetchRecords();
     }, []);
 
     const memoizedSummary = useMemo(() => summary, [summary]);
-
 
     const [isHovered1, setIsHovered1] = useState(false);
     const [isHovered2, setIsHovered2] = useState(false);
@@ -49,6 +49,9 @@ export const DetailedPage = () => {
 
     return (
         <div className="detailed">
+            <div className="your-button-in-top-right-detailed">
+                <DownloadButton name={`All time`} trades={allRecords}/>
+            </div>
             <h1 className="title">Choose a year</h1>
             <div className="years-to-choose">
                 {Object.keys(groupedByDate).map((year, index) => (

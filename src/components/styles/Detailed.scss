@@ -1,6 +1,12 @@
 .detailed {
   height: 100vh;
+  position: relative;
   text-align: center;
+}
+
+.your-button-in-top-right-detailed {
+  position: absolute;
+  right: 16px;
 }
 
 .title {
@@ -82,8 +88,8 @@
     transform: rotateX(360deg);
     transition: transform 0.4s ease;
     width: fit-content;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
   }
 }
 
