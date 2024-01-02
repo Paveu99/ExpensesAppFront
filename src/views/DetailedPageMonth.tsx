@@ -8,6 +8,7 @@ import ReactPaginate, { ReactJsPaginationProps } from 'react-js-pagination';
 import {SearchComponent} from "../components/search/SearchComponent";
 import { ExpenseEntity } from "types";
 import {SearchContext} from "../components/search/SearchContext";
+import {DownloadButton} from "../components/download/DownloadButton";
 
 
 export const DetailedPageMonth = () => {
@@ -250,6 +251,7 @@ export const DetailedPageMonth = () => {
                         <option value="Z-A">Z-A</option>
                     </select>
                 </div>
+                <DownloadButton name={`${month}_${year}` as string} trades={shownData}/>
             </div>
             <hr className="other-hr"/>
             {shownData.length === 0 ? noResults : allExpenses}
