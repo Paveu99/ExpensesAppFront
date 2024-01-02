@@ -3,6 +3,9 @@ import {NavLink, useParams} from 'react-router-dom';
 import {useRecordContext} from "../components/context/RecordContext";
 import el1 from "../components/styles/images/Back-arrow.png";
 import '../components/styles/DetailedYear.scss'
+import {SearchComponent} from "../components/search/SearchComponent";
+import {DownloadButton} from "../components/download/DownloadButton";
+import { ExpenseEntity } from "types";
 
 export const DetailedPageYear = () => {
     const { year } = useParams<{ year: string }>();
@@ -16,6 +19,8 @@ export const DetailedPageYear = () => {
 
     const memoizedData = useMemo(() => groupedByDate, [groupedByDate]);
     const memoizedYearData = useMemo(() => summaryYear, [summaryYear]);
+
+    const allElements: ExpenseEntity[] = memoizedData && memoizedData[`${year}`] ? Object.values(memoizedData[`${year}`]).flatMap(month => month) : [];
 
     const months = memoizedData && memoizedData[`${year}`] ? Object.keys(memoizedData[`${year}`]) : [];
 
@@ -56,6 +61,9 @@ export const DetailedPageYear = () => {
 
     return (
         <div className="detailed-year">
+            <div className="your-button-in-top-right">
+                <DownloadButton name={year as string} trades={allElements}/>
+            </div>
             <header className="year-header">
                 <NavLink className="back-link" to='/details/'>
                     <img className="back-icon" src={el1} alt=""/>
@@ -111,7 +119,7 @@ export const DetailedPageYear = () => {
                 </div>
                 <div className="stat">
                     <h2 className="stat__title">
-                    Category statistics:
+                        Category statistics:
                     </h2>
                     <hr/>
                     <div className="stat2">
