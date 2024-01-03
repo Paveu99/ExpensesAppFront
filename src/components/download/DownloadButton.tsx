@@ -37,10 +37,9 @@ export const DownloadButton = (props: Props) => {
                 downloadXls(e, props.trades);
             }}
         >
-            Download expenses
+            {isHovered1 && `Download expenses`}
         </button>
-            {isHovered1 ? <img src={el2} alt="Download Icon" className="download-icon"/> :
-                <img src={el1} alt="Download Icon" className="download-icon"/>}
+            {!isHovered1 && <img src={el1} alt="Download Icon" className="download-icon"/>}
         </label>
     </>
 }
