@@ -12,7 +12,7 @@ import el7 from '../styles/images/Check.png'
 import el8 from '../styles/images/Alert.png'
 import {motion} from "framer-motion";
 
-export const AddExpenseForm: React.FC = () => {
+export const AddPastExpenseForm: React.FC = () => {
     const {fetchRecords, fetchYearSummary, fetchMonthSummary} = useRecordContext();
 
     const categories: string[] = [
