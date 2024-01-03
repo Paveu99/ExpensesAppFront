@@ -6,6 +6,9 @@ import '../components/styles/DetailedYear.scss'
 import {SearchComponent} from "../components/search/SearchComponent";
 import {DownloadButton} from "../components/download/DownloadButton";
 import { ExpenseEntity } from "types";
+import el2 from "../components/styles/images/Calendar.png";
+import el3 from "../components/styles/images/Sum.png";
+import el4 from "../components/styles/images/Category.png";
 
 export const DetailedPageYear = () => {
     const { year } = useParams<{ year: string }>();
@@ -79,18 +82,24 @@ export const DetailedPageYear = () => {
             </div>
             <div className="overall-stats">
                 <div className="stat">
-                    <h2 className="stat__title">
-                        Yearly sum of money spent:
-                    </h2>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                        <img src={el3} alt="" style={{height: "35px", marginRight: "5px"}}/>
+                        <h2 className="stat__title">
+                            Annual expenses:
+                        </h2>
+                    </div>
                     <hr/>
                     <div className="stat__value">
                         {memoizedYearData.sum}$
                     </div>
                 </div>
                 <div className="stat">
-                    <h2 className="stat__title">
-                        Month statistics:
-                    </h2>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                        <img src={el2} alt="" style={{height: "35px", marginRight: "5px"}}/>
+                        <h2 className="stat__title">
+                            Month statistics:
+                        </h2>
+                    </div>
                     <hr/>
                     <div className="stat2">
                         <div className="in">Month in which most money was spent:</div>
@@ -118,9 +127,12 @@ export const DetailedPageYear = () => {
                     </div>
                 </div>
                 <div className="stat">
-                    <h2 className="stat__title">
-                        Category statistics:
-                    </h2>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                        <img src={el4} alt="" style={{height: "35px", marginRight: "5px"}}/>
+                        <h2 className="stat__title">
+                            Category statistics:
+                        </h2>
+                    </div>
                     <hr/>
                     <div className="stat2">
                         <div className="in">Category on which you spend the most money on:</div>

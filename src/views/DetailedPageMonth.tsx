@@ -9,6 +9,9 @@ import {SearchComponent} from "../components/search/SearchComponent";
 import { ExpenseEntity } from "types";
 import {SearchContext} from "../components/search/SearchContext";
 import {DownloadButton} from "../components/download/DownloadButton";
+import el3 from "../components/styles/images/Sum.png";
+import el4 from "../components/styles/images/Category.png";
+import el5 from "../components/styles/images/Top.png";
 
 
 export const DetailedPageMonth = () => {
@@ -189,8 +192,11 @@ export const DetailedPageMonth = () => {
             </header>
             <div className="overall-month-stats">
                 <div className="month-stat">
-                    <div className="month-stat__title">
-                        Sum of money spent:
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "5px"}}>
+                        <img src={el3} alt="" style={{height: "20px", marginRight: "5px"}}/>
+                        <div className="month-stat__title">
+                            Sum of money spent:
+                        </div>
                     </div>
                     <hr/>
                     <div className="month-stat__value">
@@ -198,8 +204,11 @@ export const DetailedPageMonth = () => {
                     </div>
                 </div>
                 <div className="month-stat">
-                    <div className="month-stat__title">
-                        Category statistics:
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "5px"}}>
+                        <img src={el4} alt="" style={{height: "20px", marginRight: "5px"}}/>
+                        <div className="month-stat__title">
+                            Category statistics:
+                        </div>
                     </div>
                     <hr/>
                     <div className="month-stat2">
@@ -228,8 +237,11 @@ export const DetailedPageMonth = () => {
                     </div>
                 </div>
                 <div className="month-stat">
-                    <div className="month-stat__title">
-                        The biggest expense of this month:
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "5px"}}>
+                        <img src={el5} alt="" style={{height: "20px", marginRight: "5px"}}/>
+                        <div className="month-stat__title">
+                            The biggest expense:
+                        </div>
                     </div>
                     <hr/>
                     <div

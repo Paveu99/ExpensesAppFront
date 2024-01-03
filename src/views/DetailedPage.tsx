@@ -3,6 +3,10 @@ import {useRecordContext} from "../components/context/RecordContext";
 import '../components/styles/Detailed.scss';
 import {NavLink} from "react-router-dom";
 import {DownloadButton} from "../components/download/DownloadButton";
+import el1 from "../components/styles/images/Calendar.png";
+import el2 from "../components/styles/images/Sum.png";
+import el3 from "../components/styles/images/Category.png";
+
 
 export const DetailedPage = () => {
     const {allRecords, summary, groupedByDate, fetchRecords } = useRecordContext();
@@ -62,18 +66,24 @@ export const DetailedPage = () => {
             </div>
             <div className="overall-stats">
                 <div className="stat">
-                    <h2 className="stat__title">
-                        All time sum of money spent:
-                    </h2>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                        <img src={el2} alt="" style={{height: "35px", marginRight: "5px"}}/>
+                        <h2 className="stat__title">
+                            All time expenses:
+                        </h2>
+                    </div>
                     <hr/>
                     <div className="stat__value">
                         {memoizedSummary.sum}$
                     </div>
                 </div>
                 <div className="stat">
-                    <h2 className="stat__title">
-                        Month statistics:
-                    </h2>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                        <img src={el1} alt="" style={{height: "35px", marginRight: "5px"}}/>
+                        <h2 className="stat__title">
+                            Month statistics:
+                        </h2>
+                    </div>
                     <hr/>
                     <div className="stat2">
                         <div className="in">Month in which most money was spent:</div>
@@ -101,9 +111,12 @@ export const DetailedPage = () => {
                     </div>
                 </div>
                 <div className="stat">
-                    <h2 className="stat__title">
-                        Category statistics:
-                    </h2>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                        <img src={el3} alt="" style={{height: "35px", marginRight: "5px"}}/>
+                        <h2 className="stat__title">
+                            Category statistics:
+                        </h2>
+                    </div>
                     <hr/>
                     <div className="stat2">
                         <div className="in">Category on which you spend the most money on:</div>
