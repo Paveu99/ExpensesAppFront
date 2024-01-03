@@ -45,6 +45,7 @@ export const AddExpenseForm: React.FC = () => {
     const [expenseInfo, setExpenseInfo] = useState<string>('')
 
     const change = (key: string, value: any) => {
+
         setForm(form => ({
             ...form,
             [key]: value
@@ -59,7 +60,14 @@ export const AddExpenseForm: React.FC = () => {
             setCorrectCost(value > 0);
         }
         if (key === 'month') {
-            setCorrectMonth(!!value);
+            const dateObject = new Date(value);
+
+            const today = new Date();
+            if (dateObject <= today) {
+                setCorrectMonth(!!value);
+            } else {
+                setCorrectMonth(false);
+            }
         }
     };
 
