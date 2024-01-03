@@ -1,7 +1,7 @@
 import {animated, useSpring, useTransition} from "@react-spring/web";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "../components/styles/AddView.scss"
-import {AddExpenseForm} from "../components/expenses/AddExpense";
+import {AddPastExpenseForm} from "../components/expenses/AddPastExpense";
 interface Props {
     isOpen: boolean,
     onClose: () => void
@@ -9,11 +9,23 @@ interface Props {
 
 export const AddExpenseView = (props: Props) => {
 
+    const [openedPast, setOpenedPast] = useState<boolean>(true);
+
     const handleEscape = (e: any) => {
         if (e.keyCode === 27) {
             props.onClose()
         }
     }
+
+    const styleOfLink = ({isActive}: {
+                             isActive: boolean
+                         }
+    ) => (
+        {
+            color: isActive ? "#ffffff" : '',
+            backgroundColor: isActive ? "#323232" : '',
+        }
+    )
 
     useEffect(() => {
         document.addEventListener("keydown", handleEscape)
@@ -42,23 +54,40 @@ export const AddExpenseView = (props: Props) => {
         <animated.div className='react-modal-overlay' onClick={props.onClose}>
             <animated.div style={springs} className='react-modal-wrapper' onClick={e => e.stopPropagation()}>
                 <div className='react-modal-content'>
-                    <header>
+                    <header className="add-form-header">
                         <div>
                             <h2 style={
                                 {
+                                    height: "30px",
                                     fontWeight: "bold",
                                     marginTop: "5px",
-                                    marginBottom: "5px",
+                                    marginBottom: "10px",
                                     background: 'linear-gradient(to right, #00ff00, #ffffff)',
                                     WebkitBackgroundClip: 'text',
                                     color: 'transparent',
                                 }
-                            }>NEW EXPENSE</h2>
+                            }>
+                                NEW EXPENSE
+                            </h2>
+                        </div>
+                        <div className="change-buttons">
+                            <button
+                                onClick={() => setOpenedPast(true)}
+                                className={openedPast ? 'activeForm' : 'inactiveForm'}
+                            >
+                                PAST
+                            </button>
+                            <button
+                                onClick={() => setOpenedPast(false)}
+                                className={!openedPast ? 'activeForm' : 'inactiveForm'}
+                            >
+                                FUTURE
+                            </button>
                         </div>
                         <a href='#' className="close" onClick={props.onClose}></a>
                     </header>
                     <hr/>
-                    <AddExpenseForm/>
+                    {openedPast ? <AddPastExpenseForm/> : 'FutureForm'}
                 </div>
             </animated.div>
         </animated.div>
