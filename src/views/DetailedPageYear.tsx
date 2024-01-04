@@ -68,14 +68,14 @@ export const DetailedPageYear = () => {
                 <DownloadButton name={year as string} trades={allElements}/>
             </div>
             <header className="year-header">
-                <NavLink className="back-link" to='/details/'>
+                <NavLink className="back-link" to='/details/past/'>
                     <img className="back-icon" src={el1} alt=""/>
                 </NavLink>
                 <h1>Details for the year <span style={{color: "#3498db"}}>{year}</span></h1>
             </header>
             <div className="year-content">
                 {months.map((month, index) => (
-                    <NavLink className="month" to={`/details/${year}/${month}`}>
+                    <NavLink className="month" to={`/details/past/${year}/${month}`}>
                         <p key={index}>{month}</p>
                     </NavLink>
                 ))}
@@ -89,8 +89,10 @@ export const DetailedPageYear = () => {
                         </h2>
                     </div>
                     <hr/>
-                    <div className="stat__value">
-                        {memoizedYearData.sum}$
+                    <div className="stat__handler">
+                        <div className="stat__value">
+                            {memoizedYearData.sum}$
+                        </div>
                     </div>
                 </div>
                 <div className="stat">

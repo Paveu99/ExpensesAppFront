@@ -185,7 +185,7 @@ export const DetailedPageMonth = () => {
     return (
         <div className="detailed-month">
             <header className="month-header">
-                <NavLink className="back-link" to={`/details/${year}`}>
+                <NavLink className="back-link" to={`/details/past/${year}`}>
                     <img className="back-icon" src={el1} alt=""/>
                 </NavLink>
                 <h1>Details for the month <span style={{color: "#3498db"}}>{month} {year}</span></h1>
