@@ -27,9 +27,51 @@
   padding: 1rem;
 }
 
-header {
+.add-form-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
+  align-items: center;
+  margin-top: 5px;
+  height: 30px;
+}
+
+.change-buttons {
+  margin-left: 5px;
+}
+
+.activeForm {
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  background-color: rgba(0, 255, 0, 0.56);
+  padding: 0px 8px 0px 8px;
+  border: solid 1px rgba(0, 255, 0, 0.56);
+  border-radius: 10px 10px 0px 0px;
+  transition: 500ms;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  height: 30px;
+  margin-left: 8px;
+}
+
+.inactiveForm {
+  font-size: 22px;
+  font-weight: bold;
+  transition: 500ms;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(0, 255, 0, 0.56);
+  border: solid 1px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  padding: 0px 8px 0px 8px;
+  border-radius: 10px 10px 0px 0px;
+  height: 30px;
+  margin-left: 8px;
+}
+
+.inactiveForm:hover {
+  background-color: rgba(255, 255, 255, 0.44);;
+  border: solid 1px rgba(255, 255, 255, 0.44);;
 }
 
 .close {

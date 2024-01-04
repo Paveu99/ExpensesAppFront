@@ -1,6 +1,14 @@
 .detailed-year {
   height: 100vh;
+  position: relative;
 }
+
+.your-button-in-top-right {
+  position: absolute;
+  top: 22px;
+  right: 16px;
+}
+
 .year-header {
   display: flex;
   justify-content: center;
@@ -29,6 +37,7 @@
   align-items: center;
   text-decoration: none;
   padding-left: 10px;
+  margin-bottom: 16px;
   height: 40px;
   border-radius: 10px
 }

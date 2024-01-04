@@ -1,31 +1,22 @@
-import React, {useEffect, useMemo, useState} from "react";
-import {NavLink, useParams} from 'react-router-dom';
+import React, {useEffect, useMemo, useState} from 'react';
 import {useRecordContext} from "../components/context/RecordContext";
-import el1 from "../components/styles/images/Back-arrow.png";
-import '../components/styles/DetailedYear.scss'
-import {SearchComponent} from "../components/search/SearchComponent";
+import '../components/styles/DetailedPast.scss';
+import {NavLink} from "react-router-dom";
 import {DownloadButton} from "../components/download/DownloadButton";
-import { ExpenseEntity } from "types";
-import el2 from "../components/styles/images/Calendar.png";
-import el3 from "../components/styles/images/Sum.png";
-import el4 from "../components/styles/images/Category.png";
+import el1 from "../components/styles/images/Calendar.png";
+import el2 from "../components/styles/images/Sum.png";
+import el3 from "../components/styles/images/Category.png";
+import el4 from "../components/styles/images/Back-arrow.png";
 
-export const DetailedPageYear = () => {
-    const { year } = useParams<{ year: string }>();
 
-    const { summaryYear, groupedByDate, fetchRecords, fetchYearSummary } = useRecordContext();
+export const DetailedPagePast = () => {
+    const {allRecords, summary, groupedByDate, fetchRecords } = useRecordContext();
 
     useEffect(() => {
-        fetchRecords();
-        fetchYearSummary(year);
+    fetchRecords();
     }, []);
 
-    const memoizedData = useMemo(() => groupedByDate, [groupedByDate]);
-    const memoizedYearData = useMemo(() => summaryYear, [summaryYear]);
-
-    const allElements: ExpenseEntity[] = memoizedData && memoizedData[`${year}`] ? Object.values(memoizedData[`${year}`]).flatMap(month => month) : [];
-
-    const months = memoizedData && memoizedData[`${year}`] ? Object.keys(memoizedData[`${year}`]) : [];
+    const memoizedSummary = useMemo(() => summary, [summary]);
 
     const [isHovered1, setIsHovered1] = useState(false);
     const [isHovered2, setIsHovered2] = useState(false);
@@ -61,43 +52,42 @@ export const DetailedPageYear = () => {
         setIsHovered4(false);
     };
 
-
     return (
-        <div className="detailed-year">
-            <div className="your-button-in-top-right">
-                <DownloadButton name={year as string} trades={allElements}/>
+        <div className="detailed-all-time">
+            <div className="your-button-in-top-right-detailed">
+                <DownloadButton name={`All time`} trades={allRecords}/>
             </div>
-            <header className="year-header">
-                <NavLink className="back-link" to='/details/past/'>
-                    <img className="back-icon" src={el1} alt=""/>
+            <header className="header">
+                <NavLink className="back-link" to='/details'>
+                    <img className="back-icon" src={el4} alt=""/>
                 </NavLink>
-                <h1>Details for the year <span style={{color: "#3498db"}}>{year}</span></h1>
+                <h1>Choose a year</h1>
             </header>
-            <div className="year-content">
-                {months.map((month, index) => (
-                    <NavLink className="month" to={`/details/past/${year}/${month}`}>
-                        <p key={index}>{month}</p>
+            <div className="years-to-choose">
+                {Object.keys(groupedByDate).map((year, index) => (
+                    <NavLink className="years-to-choose__link" to={`/details/past/${year}`}>
+                        <p className="text">{year}</p>
                     </NavLink>
                 ))}
             </div>
             <div className="overall-stats">
                 <div className="stat">
                     <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
-                        <img src={el3} alt="" style={{height: "35px", marginRight: "5px"}}/>
+                        <img src={el2} alt="" style={{height: "35px", marginRight: "5px"}}/>
                         <h2 className="stat__title">
-                            Annual expenses:
+                            All time expenses:
                         </h2>
                     </div>
                     <hr/>
                     <div className="stat__handler">
                         <div className="stat__value">
-                            {memoizedYearData.sum}$
+                            {memoizedSummary.sum}$
                         </div>
                     </div>
                 </div>
                 <div className="stat">
                     <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
-                        <img src={el2} alt="" style={{height: "35px", marginRight: "5px"}}/>
+                        <img src={el1} alt="" style={{height: "35px", marginRight: "5px"}}/>
                         <h2 className="stat__title">
                             Month statistics:
                         </h2>
@@ -111,7 +101,7 @@ export const DetailedPageYear = () => {
                                 onMouseEnter={handleMouseEnter1}
                                 onMouseLeave={handleMouseLeave1}
                             >
-                                {isHovered1 ? `${memoizedYearData.maxAmountMonth}$` : memoizedYearData.monthMost}
+                                {isHovered1 ? `${memoizedSummary.maxAmountMonth}$` : memoizedSummary.monthMost}
                             </div>
                         </div>
                     </div>
@@ -123,14 +113,14 @@ export const DetailedPageYear = () => {
                                 onMouseEnter={handleMouseEnter2}
                                 onMouseLeave={handleMouseLeave2}
                             >
-                                {isHovered2 ? `${memoizedYearData.minAmountMonth}$` : memoizedYearData.monthLeast}
+                                {isHovered2 ? `${memoizedSummary.minAmountMonth}$` : memoizedSummary.monthLeast}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="stat">
                     <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
-                        <img src={el4} alt="" style={{height: "35px", marginRight: "5px"}}/>
+                        <img src={el3} alt="" style={{height: "35px", marginRight: "5px"}}/>
                         <h2 className="stat__title">
                             Category statistics:
                         </h2>
@@ -144,7 +134,7 @@ export const DetailedPageYear = () => {
                                 onMouseEnter={handleMouseEnter3}
                                 onMouseLeave={handleMouseLeave3}
                             >
-                                {isHovered3 ? `${memoizedYearData.maxAmountCat}$` : memoizedYearData.categoryMost}
+                                {isHovered3 ? `${memoizedSummary.maxAmountCat}$` : memoizedSummary.categoryMost}
                             </div>
                         </div>
                     </div>
@@ -156,7 +146,7 @@ export const DetailedPageYear = () => {
                                 onMouseEnter={handleMouseEnter4}
                                 onMouseLeave={handleMouseLeave4}
                             >
-                                {isHovered4 ? `${memoizedYearData.minAmountCat}$` : memoizedYearData.categoryLeast}
+                                {isHovered4 ? `${memoizedSummary.minAmountCat}$` : memoizedSummary.categoryLeast}
                             </div>
                         </div>
                     </div>
