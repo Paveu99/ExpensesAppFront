@@ -207,9 +207,9 @@ export const AddPastExpenseForm: React.FC = () => {
                         <div className="check">
                             <input
                                 placeholder="Insert a value"
-                                min="0"
                                 name="cost"
-                                type="number"
+                                type="text"
+                                pattern="[0-9]*([.][0-9]{0,2})?"
                                 className="form__cost input"
                                 value={form.cost === 0 ? '' : form.cost}
                                 onChange={e => change('cost', e.target.value)}
