@@ -133,6 +133,26 @@ export const DetailedPageMonth = () => {
             }
             return 0;
         })
+    } else if (option === 'High') {
+        shownData = shownData.sort(function (a: ExpenseEntity, b: ExpenseEntity) {
+            if (a.cost < b.cost) {
+                return 1;
+            }
+            if (a.cost > b.cost) {
+                return -1;
+            }
+            return 0;
+        })
+    } else if (option === 'Low') {
+        shownData = shownData.sort(function (a: ExpenseEntity, b: ExpenseEntity) {
+            if (a.cost < b.cost) {
+                return -1;
+            }
+            if (a.cost > b.cost) {
+                return 1;
+            }
+            return 0;
+        })
     }
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -261,6 +281,8 @@ export const DetailedPageMonth = () => {
                         <option value="New">New</option>
                         <option value="A-Z">A-Z</option>
                         <option value="Z-A">Z-A</option>
+                        <option value="High">High</option>
+                        <option value="Low">Low</option>
                     </select>
                 </div>
                 <DownloadButton name={`${month}_${year}` as string} trades={shownData}/>
