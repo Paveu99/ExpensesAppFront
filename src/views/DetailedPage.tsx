@@ -8,7 +8,7 @@ export const DetailedPage = () => {
           <NavLink className="choices__past" to={`/details/past`}>
               <p className="text">Past</p>
           </NavLink>
-          <NavLink className="choices__future" to={`/details/past`}>
+          <NavLink className="choices__future" to={`/details/future`}>
               <p className="text">Future</p>
           </NavLink>
       </div>

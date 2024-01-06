@@ -65,7 +65,7 @@ export const DetailedPageYear = () => {
     return (
         <div className="detailed-year">
             <div className="your-button-in-top-right">
-                <DownloadButton name={year as string} trades={allElements}/>
+                <DownloadButton color="blue" name={year as string} trades={allElements}/>
             </div>
             <header className="year-header">
                 <NavLink className="back-link" to='/details/past/'>
