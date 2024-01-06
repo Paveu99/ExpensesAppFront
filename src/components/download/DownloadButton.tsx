@@ -3,11 +3,11 @@ import * as XLSX from 'xlsx';
 import {ExpenseEntity} from 'types';
 import '../styles/DownloadButton.scss';
 import el1 from '../styles/images/Download.png'
-import el2 from '../styles/images/Download-blue.png'
 
 interface Props {
     name: string;
     trades: ExpenseEntity[];
+    color: string;
 }
 export const DownloadButton = (props: Props) => {
 
@@ -18,6 +18,24 @@ export const DownloadButton = (props: Props) => {
     const handleMouseLeave1 = () => {
         setIsHovered1(false);
     };
+
+    let wanted = '';
+    let wantedColor = '';
+
+    if (props.color === "blue") {
+        wanted = '#3498db';
+        wantedColor = '#3498db'
+    } else {
+        wanted = 'rgba(213, 219, 52, 0.77)';
+        wantedColor = 'rgba(165, 168, 71, 0.77)'
+    }
+
+    const color = {
+        backgroundColor: isHovered1 ? '#ffffff' : wanted,
+        color: isHovered1 ? wantedColor : '#ffffff',
+        border: `solid 2px ${wanted}`,
+    };
+
     const downloadXls = (e: React.MouseEvent, data: any) => {
         e.preventDefault();
         const ws = XLSX.utils.json_to_sheet(data);
@@ -36,6 +54,7 @@ export const DownloadButton = (props: Props) => {
             onClick={(e) => {
                 downloadXls(e, props.trades);
             }}
+            style={color}
         >
             {isHovered1 && `Download expenses`}
         </button>
