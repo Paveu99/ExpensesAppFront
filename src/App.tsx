@@ -12,6 +12,7 @@ import {DetailedPageYear} from "./views/DetailedPageYear";
 import {DetailedPageMonth} from "./views/DetailedPageMonth";
 import { SearchContext } from './components/search/SearchContext';
 import {DetailedPage} from "./views/DetailedPage";
+import {DetailedPageFuture} from "./views/DetailedPageFuture";
 export const App = () => {
 
     const [search, setSearch] = useState('')
@@ -36,6 +37,7 @@ export const App = () => {
                         <Route path="/info" element={<InfoPage/>}/>
                         <Route path="/creator" element={<CreatorPage/>}/>
                         <Route path="/details" element={<DetailedPage/>}/>
+                        <Route path="/details/future" element={<DetailedPageFuture/>}/>
                         <Route path="/details/past" element={<DetailedPagePast/>}/>
                         <Route path="/details/past/:year" element={<DetailedPageYear/>}/>
                         <Route path="/details/past/:year/:month" element={<DetailedPageMonth/>}/>

@@ -33,6 +33,10 @@ interface RecordContextProps {
     fetchRecords: () => Promise<void>;
     fetchYearSummary: (year: string | undefined) => Promise<void>;
     fetchMonthSummary: (year: string | undefined, month: string | undefined) => Promise<void>;
+    allFutureRecords: ExpenseEntity[];
+    groupedByDateFuture: ExpensesGroupedByDate;
+    summaryFuture: Summary;
+    fetchFutureRecords: () => Promise<void>;
 }
 
 const RecordContext = createContext<RecordContextProps | undefined>(undefined);
@@ -79,10 +83,24 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         maxAmountCat: 0,
         minAmountCat: 0,
     });
+    const [allFutureRecords, setAllFutureRecords] = useState<ExpenseEntity[]>([]);
+    const [groupedByDateFuture, setGroupedByDateFuture] = useState<ExpensesGroupedByDate>({});
+    const [summaryFuture, setSummaryFuture] = useState<Summary>({
+        sum: 0,
+        categoryMost: '',
+        categoryLeast: '',
+        latest: '',
+        cost: 0,
+        monthMost: '',
+        monthLeast: '',
+        maxAmountMonth: 0,
+        minAmountMonth: 0,
+        maxAmountCat: 0,
+        minAmountCat: 0,
+    });
 
     const fetchRecords = async () => {
         try {
-            // Replace the URL with your actual API endpoint
             const response = await fetch('http://localhost:3001/expenses');
             const data = await response.json();
             setAllRecords(data.allExpenses);
@@ -94,7 +112,6 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
     };
     const fetchYearSummary = async (year: string | undefined) => {
         try {
-            // Replace the URL with your actual API endpoint
             const response = await fetch(`http://localhost:3001/expenses/${year}`);
             const data = await response.json();
             setSummaryYear(data.summaryYear);
@@ -104,10 +121,20 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
     };
     const fetchMonthSummary = async (year: string | undefined, month: string | undefined) => {
         try {
-            // Replace the URL with your actual API endpoint
             const response = await fetch(`http://localhost:3001/expenses/${year}/${month}`);
             const data = await response.json();
             setSummaryMonth(data.summaryMonth);
+        } catch (error) {
+            console.error('Error fetching records:', error);
+        }
+    };
+    const fetchFutureRecords = async () => {
+        try {
+            const response = await fetch('http://localhost:3001/plannedExpenses');
+            const data = await response.json();
+            setAllFutureRecords(data.allExpenses);
+            setGroupedByDateFuture(data.expensesGroupedByDate);
+            setSummaryFuture(data.summary);
         } catch (error) {
             console.error('Error fetching records:', error);
         }
@@ -121,6 +148,10 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         fetchRecords,
         fetchYearSummary,
         fetchMonthSummary,
+        allFutureRecords,
+        groupedByDateFuture,
+        summaryFuture,
+        fetchFutureRecords,
     };
 
     return (

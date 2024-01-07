@@ -20,7 +20,7 @@ export const DetailedPageMonth = () => {
 
     const {summaryMonth, groupedByDate, fetchRecords, fetchMonthSummary} = useRecordContext();
 
-    const {search} = useContext(SearchContext)
+    const {search, setSearch} = useContext(SearchContext)
 
     useEffect(() => {
         fetchRecords();
@@ -205,7 +205,7 @@ export const DetailedPageMonth = () => {
     return (
         <div className="detailed-month">
             <header className="month-header">
-                <NavLink className="back-link" to={`/details/past/${year}`}>
+                <NavLink className="back-link" onClick={() => setSearch('')} to={`/details/past/${year}`}>
                     <img className="back-icon" src={el1} alt=""/>
                 </NavLink>
                 <h1>Details for the month <span style={{color: "#3498db"}}>{month} {year}</span></h1>
@@ -285,7 +285,7 @@ export const DetailedPageMonth = () => {
                         <option value="Low">Low</option>
                     </select>
                 </div>
-                <DownloadButton name={`${month}_${year}` as string} trades={shownData}/>
+                <DownloadButton color="blue" name={`${month}_${year}` as string} trades={shownData}/>
             </div>
             <hr className="other-hr"/>
             {shownData.length === 0 ? noResults : allExpenses}

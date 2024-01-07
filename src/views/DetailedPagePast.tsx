@@ -55,7 +55,7 @@ export const DetailedPagePast = () => {
     return (
         <div className="detailed-all-time">
             <div className="your-button-in-top-right-detailed">
-                <DownloadButton name={`All time`} trades={allRecords}/>
+                <DownloadButton color="blue" name={`All time`} trades={allRecords}/>
             </div>
             <header className="header">
                 <NavLink className="back-link" to='/details'>
