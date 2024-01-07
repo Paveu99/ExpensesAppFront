@@ -68,7 +68,7 @@ export const DetailedPageFuture = () => {
     const calculateRowsPerPage = () => {
         const windowHeight = window.innerHeight;
 
-        const rowsPerPage = Math.floor((windowHeight - 270 - 50 - 85 - 50) / 50);
+        const rowsPerPage = Math.floor((windowHeight - 270 - 50 - 85 - 50) / 60);
 
         return rowsPerPage > 0 ? rowsPerPage : 1;
     };
@@ -280,7 +280,7 @@ export const DetailedPageFuture = () => {
                 </div>
                 <hr/>
                 <div className="stat2-future">
-                    <div className="in-future">Month in which most money was spent:</div>
+                    <div className="in-future">Month in which most money is planned:</div>
                     <div className="stat__handler">
                         <div
                             className={isHovered1 ? "stat__value2-hovered" : "stat__value2"}
@@ -292,7 +292,7 @@ export const DetailedPageFuture = () => {
                     </div>
                 </div>
                 <div className="stat2-future">
-                    <div className="in-future">Month in which the least amount of money was spent:</div>
+                    <div className="in-future">Month in which the least amount of money is planned:</div>
                     <div className="stat__handler">
                         <div
                             className={isHovered2 ? "stat__value2-hovered" : "stat__value2"}
@@ -313,7 +313,7 @@ export const DetailedPageFuture = () => {
                 </div>
                 <hr/>
                 <div className="stat2-future">
-                    <div className="in-future">Category on which you spend the most money on:</div>
+                    <div className="in-future">Category on which you plan to spend the most money on:</div>
                     <div className="stat__handler">
                         <div
                             className={isHovered3 ? "stat__value2-hovered" : "stat__value2"}
@@ -325,7 +325,7 @@ export const DetailedPageFuture = () => {
                     </div>
                 </div>
                 <div className="stat2-future">
-                    <div className="in-future">Category on which you spend the least money on:</div>
+                    <div className="in-future">Category on which you plan to spend the least money on:</div>
                     <div className="stat__handler">
                         <div
                             className={isHovered4 ? "stat__value2-hovered" : "stat__value2"}
@@ -340,7 +340,7 @@ export const DetailedPageFuture = () => {
         </div>
         <div className="manage">
             <SearchComponent page={() => setCurrentPage(1)}/>
-            <button className="reset" onClick={() => setOption("Old")}>Reset filters</button>
+            {option !== 'Old' && <button className="reset" onClick={() => setOption("Old")}>Reset filters</button>}
             <DownloadButton color="yellow" name={`Planned expenses` as string} trades={shownData}/>
         </div>
         <hr className="other-hr"/>
