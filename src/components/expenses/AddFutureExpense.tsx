@@ -7,13 +7,13 @@ import el2 from '../styles/images/Category.png';
 import el3 from '../styles/images/Cost.png';
 import el4 from '../styles/images/Date.png';
 import el5 from '../styles/images/Note.png';
-import el6 from '../styles/images/Past.png'
+import el6 from '../styles/images/Future.png'
 import el7 from '../styles/images/Check.png'
 import el8 from '../styles/images/Alert.png'
 import {motion} from "framer-motion";
 
-export const AddPastExpenseForm: React.FC = () => {
-    const {fetchRecords, fetchYearSummary, fetchMonthSummary} = useRecordContext();
+export const AddFutureExpenseForm: React.FC = () => {
+    const {fetchFutureRecords} = useRecordContext();
 
     const categories: string[] = [
         "Food",
@@ -63,7 +63,7 @@ export const AddPastExpenseForm: React.FC = () => {
             const dateObject = new Date(value);
 
             const today = new Date();
-            if (dateObject <= today) {
+            if (dateObject >= today) {
                 setCorrectMonth(!!value);
             } else {
                 setCorrectMonth(false);
@@ -78,7 +78,7 @@ export const AddPastExpenseForm: React.FC = () => {
         if (correctAll) {
             setSubmitted(true)
             try {
-                const res = await fetch('http://localhost:3001/expenses', {
+                const res = await fetch('http://localhost:3001/plannedExpenses', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -87,11 +87,7 @@ export const AddPastExpenseForm: React.FC = () => {
                 });
                 const data = await res.json();
                 setExpenseInfo(`${data.name} was successfully added to the database`);
-                const dateString = data.month;
-                const [year, month, day] = dateString.split('-');
-                fetchRecords();
-                fetchYearSummary(year);
-                fetchMonthSummary(year, month)
+                fetchFutureRecords();
             } catch (error) {
                 console.error('Error adding record:', error);
             }
@@ -104,15 +100,15 @@ export const AddPastExpenseForm: React.FC = () => {
     };
 
     const addedExpense = <motion.div
-            className="added-expense"
-            initial="hidden"
-            animate="visible"
-            variants={variantsLeft}
-            transition={{duration: 1}}
-        >
-            <img src={el8} className="desc-icon" alt=""/>
-            <div style={{fontSize: "12px"}}>{expenseInfo}</div>
-        </motion.div>
+        className="added-expense"
+        initial="hidden"
+        animate="visible"
+        variants={variantsLeft}
+        transition={{duration: 1}}
+    >
+        <img src={el8} className="desc-icon" alt=""/>
+        <div style={{fontSize: "12px"}}>{expenseInfo}</div>
+    </motion.div>
 
     const addAnotherOneFromScratch = () => {
         setForm({
@@ -144,7 +140,7 @@ export const AddPastExpenseForm: React.FC = () => {
             <div className="wrapper-div">
                 <div className="wrapper-div__columns">
                     <div>
-                        <div className="label" style={{color: "#3498db"}}>
+                        <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
                             <img className="desc-icon" src={el1} alt=""/>
                             Name: <br/>
                         </div>
@@ -160,21 +156,21 @@ export const AddPastExpenseForm: React.FC = () => {
                             {
                                 correctName &&
                                 <motion.div
-                                initial="hidden"
-                                animate="visible"
-                                variants={variantsLeft}
-                                transition={{duration: 0.8}}
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={variantsLeft}
+                                    transition={{duration: 0.8}}
                                 >
-                                <img src={el7} className="check__icon" alt=""/>
+                                    <img src={el7} className="check__icon" alt=""/>
                                 </motion.div>
                             }
                         </div>
                     </div>
-                <div>
-                    <div className="label" style={{color: "#3498db"}}>
-                        <img className="desc-icon" src={el2} alt=""/>
-                        Category: <br/>
-                    </div>
+                    <div>
+                        <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
+                            <img className="desc-icon" src={el2} alt=""/>
+                            Category: <br/>
+                        </div>
                         <div className="check">
                             <select
                                 className="form__category input"
@@ -199,11 +195,11 @@ export const AddPastExpenseForm: React.FC = () => {
                             }
                         </div>
                     </div>
-                <div>
-                    <div className="label" style={{color: "#3498db"}}>
-                        <img className="desc-icon" src={el3} alt=""/>
-                        Cost: <br/>
-                    </div>
+                    <div>
+                        <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
+                            <img className="desc-icon" src={el3} alt=""/>
+                            Cost: <br/>
+                        </div>
                         <div className="check">
                             <input
                                 placeholder="Insert a value"
@@ -229,15 +225,15 @@ export const AddPastExpenseForm: React.FC = () => {
                                 >
                                     <img src={el7} className="check__icon" alt=""/>
                                 </motion.div>
-                    }
+                            }
                         </div>
                     </div>
-                <div>
-                    <div className="label" style={{color: "#3498db"}}>
-                        <img className="desc-icon" src={el4} alt=""/>
-                        Date: <br/>
-                    </div>
-                    <div className="check">
+                    <div>
+                        <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
+                            <img className="desc-icon" src={el4} alt=""/>
+                            Date: <br/>
+                        </div>
+                        <div className="check">
                             <input
                                 name="months"
                                 type="date"
@@ -256,14 +252,14 @@ export const AddPastExpenseForm: React.FC = () => {
                                     <img src={el7} className="check__icon" alt=""/>
                                 </motion.div>
                             }
+                        </div>
                     </div>
                 </div>
+                <img src={el6} className="wrapper-div__image" alt=""/>
             </div>
-            <img src={el6} className="wrapper-div__image" alt=""/>
-        </div>
-    <div className="wrapper-div__textarea">
-        <div className="label" style={{color: "#3498db"}}>
-            <img className="desc-icon" src={el5} alt=""/>
+            <div className="wrapper-div__textarea">
+                <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
+                    <img className="desc-icon" src={el5} alt=""/>
                     Notes: <br/>
                 </div>
                 <textarea
@@ -280,12 +276,12 @@ export const AddPastExpenseForm: React.FC = () => {
                 <button
                     type="submit"
                     className={
-                    correctAll
-                        ? "buttons__add"
-                        : "buttons__add-disabled"
-                }
+                        correctAll
+                            ? "buttons__add"
+                            : "buttons__add-disabled"
+                    }
                 >
-                    Add past expense
+                    Add future expense
                 </button>
                 <button
                     className="buttons__reset"
