@@ -17,7 +17,7 @@
 .overall-stats-future {
   display: grid;
   text-align: left;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 2fr 3fr 3fr;
   gap: 16px;
   margin: 16px;
   grid-row-gap: 1px;
