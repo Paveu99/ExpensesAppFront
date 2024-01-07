@@ -2,6 +2,7 @@ import {animated, useSpring, useTransition} from "@react-spring/web";
 import React, {useEffect, useState} from "react";
 import "../components/styles/AddView.scss"
 import {AddPastExpenseForm} from "../components/expenses/AddPastExpense";
+import {AddFutureExpenseForm} from "../components/expenses/AddFutureExpense";
 interface Props {
     isOpen: boolean,
     onClose: () => void
@@ -16,16 +17,6 @@ export const AddExpenseView = (props: Props) => {
             props.onClose()
         }
     }
-
-    const styleOfLink = ({isActive}: {
-                             isActive: boolean
-                         }
-    ) => (
-        {
-            color: isActive ? "#ffffff" : '',
-            backgroundColor: isActive ? "#323232" : '',
-        }
-    )
 
     useEffect(() => {
         document.addEventListener("keydown", handleEscape)
@@ -62,7 +53,7 @@ export const AddExpenseView = (props: Props) => {
                                     fontWeight: "bold",
                                     marginTop: "5px",
                                     marginBottom: "10px",
-                                    background: 'linear-gradient(to right, #00ff00, #ffffff)',
+                                    background: 'linear-gradient(to right, #ffffff, #ffffff)',
                                     WebkitBackgroundClip: 'text',
                                     color: 'transparent',
                                 }
@@ -73,13 +64,13 @@ export const AddExpenseView = (props: Props) => {
                         <div className="change-buttons">
                             <button
                                 onClick={() => setOpenedPast(true)}
-                                className={openedPast ? 'activeForm' : 'inactiveForm'}
+                                className={openedPast ? 'activePastForm' : 'inactivePastForm'}
                             >
                                 PAST
                             </button>
                             <button
                                 onClick={() => setOpenedPast(false)}
-                                className={!openedPast ? 'activeForm' : 'inactiveForm'}
+                                className={!openedPast ? 'activeFutureForm' : 'inactiveFutureForm'}
                             >
                                 FUTURE
                             </button>
@@ -87,7 +78,7 @@ export const AddExpenseView = (props: Props) => {
                         <a href='#' className="close" onClick={props.onClose}></a>
                     </header>
                     <hr/>
-                    {openedPast ? <AddPastExpenseForm/> : 'FutureForm'}
+                    {openedPast ? <AddPastExpenseForm/> : <AddFutureExpenseForm/>}
                 </div>
             </animated.div>
         </animated.div>
