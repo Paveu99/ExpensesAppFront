@@ -1,13 +1,13 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import {useRecordContext} from "../context/RecordContext";
 import {AddNewExpense} from 'types'
-import '../styles/AddExpense.scss'
+import '../styles/AddPastExpense.scss'
 import el1 from '../styles/images/Name.png';
 import el2 from '../styles/images/Category.png';
 import el3 from '../styles/images/Cost.png';
 import el4 from '../styles/images/Date.png';
 import el5 from '../styles/images/Note.png';
-import el6 from '../styles/images/AddImage.png'
+import el6 from '../styles/images/Past.png'
 import el7 from '../styles/images/Check.png'
 import el8 from '../styles/images/Alert.png'
 import {motion} from "framer-motion";
@@ -144,7 +144,7 @@ export const AddPastExpenseForm: React.FC = () => {
             <div className="wrapper-div">
                 <div className="wrapper-div__columns">
                     <div>
-                        <div className="label">
+                        <div className="label" style={{color: "#3498db"}}>
                             <img className="desc-icon" src={el1} alt=""/>
                             Name: <br/>
                         </div>
@@ -171,7 +171,7 @@ export const AddPastExpenseForm: React.FC = () => {
                         </div>
                     </div>
                 <div>
-                    <div className="label">
+                    <div className="label" style={{color: "#3498db"}}>
                         <img className="desc-icon" src={el2} alt=""/>
                         Category: <br/>
                     </div>
@@ -200,7 +200,7 @@ export const AddPastExpenseForm: React.FC = () => {
                         </div>
                     </div>
                 <div>
-                    <div className="label">
+                    <div className="label" style={{color: "#3498db"}}>
                         <img className="desc-icon" src={el3} alt=""/>
                         Cost: <br/>
                     </div>
@@ -233,7 +233,7 @@ export const AddPastExpenseForm: React.FC = () => {
                         </div>
                     </div>
                 <div>
-                    <div className="label">
+                    <div className="label" style={{color: "#3498db"}}>
                         <img className="desc-icon" src={el4} alt=""/>
                         Date: <br/>
                     </div>
@@ -262,7 +262,7 @@ export const AddPastExpenseForm: React.FC = () => {
             <img src={el6} className="wrapper-div__image" alt=""/>
         </div>
     <div className="wrapper-div__textarea">
-        <div className="label">
+        <div className="label" style={{color: "#3498db"}}>
             <img className="desc-icon" src={el5} alt=""/>
                     Notes: <br/>
                 </div>
@@ -285,7 +285,7 @@ export const AddPastExpenseForm: React.FC = () => {
                         : "buttons__add-disabled"
                 }
                 >
-                    Add expense
+                    Add past expense
                 </button>
                 <button
                     className="buttons__reset"
