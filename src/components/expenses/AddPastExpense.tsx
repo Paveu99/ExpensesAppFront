@@ -42,7 +42,7 @@ export const AddPastExpenseForm: React.FC = () => {
     const [correctMonth, setCorrectMonth] = useState<boolean>(false);
     const [correctAll, setCorrectAll] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
-    const [expenseInfo, setExpenseInfo] = useState<string>('')
+    const [expenseInfo, setExpenseInfo] = useState<string>('');
 
     const change = (key: string, value: any) => {
 
