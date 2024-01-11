@@ -243,141 +243,143 @@ export const ExpenseDetailsPanel = (props: Props) => {
 
 
     const editForm = <>
+        <a href='#' className="close-button" onClick={props.onClose}></a>
+        <h2><span style={{color: "#3498db"}}>{original.name}</span> details:</h2>
         <form autoComplete='off' className="form" onSubmit={checkInput}>
-        <div className="wrapper-div">
-            <div className="wrapper-div__columns">
-                <div>
-                    <div className="label" style={{color: "#3498db"}}>
-                        <img className="desc-icon" src={el1} alt=""/>
-                        Name{changedName && '*'}: <br/>
+            <div className="wrapper-div">
+                <div className="wrapper-div__columns">
+                    <div>
+                        <div className="label" style={{color: "#3498db"}}>
+                            <img className="desc-icon" src={el1} alt=""/>
+                            Name{changedName && '*'}: <br/>
+                        </div>
+                        <div className="check-edit">
+                            <input
+                                placeholder="Add name"
+                                type="text"
+                                name="name"
+                                className="form__name input"
+                                value={form.name}
+                                onChange={e => change('name', e.target.value)}
+                            />
+                            {
+                                correctName &&
+                                <motion.div
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={variantsLeft}
+                                    transition={{duration: 0.8}}
+                                >
+                                    <img src={el7} className="check__icon" alt=""/>
+                                </motion.div>
+                            }
+                        </div>
                     </div>
-                    <div className="check-edit">
-                        <input
-                            placeholder="Add name"
-                            type="text"
-                            name="name"
-                            className="form__name input"
-                            value={form.name}
-                            onChange={e => change('name', e.target.value)}
-                        />
-                        {
-                            correctName &&
-                            <motion.div
-                                initial="hidden"
-                                animate="visible"
-                                variants={variantsLeft}
-                                transition={{duration: 0.8}}
-                            >
-                                <img src={el7} className="check__icon" alt=""/>
-                            </motion.div>
-                        }
+                    <div>
+                        <div className="label" style={{color: "#3498db"}}>
+                            <img className="desc-icon" src={el2} alt=""/>
+                            Category{changedCategory && '*'}: <br/>
+                        </div>
+                        <div className="check-edit">
+                            <select
+                                className="form__category input"
+                                name="category"
+                                value={form.category}
+                                onChange={e => change('category', e.target.value)}>
+                                <option value="">Choose a category</option>
+                                {categories.map((category) => {
+                                    return (<option value={category}>{category}</option>)
+                                })}
+                            </select>
+                            {
+                                correctCategory &&
+                                <motion.div
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={variantsLeft}
+                                    transition={{duration: 0.8}}
+                                >
+                                    <img src={el7} className="check__icon" alt=""/>
+                                </motion.div>
+                            }
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div className="label" style={{color: "#3498db"}}>
-                        <img className="desc-icon" src={el2} alt=""/>
-                        Category{changedCategory && '*'}: <br/>
+                    <div>
+                        <div className="label" style={{color: "#3498db"}}>
+                            <img className="desc-icon" src={el3} alt=""/>
+                            Cost{changedCost && '*'}: <br/>
+                        </div>
+                        <div className="check-edit">
+                            <input
+                                placeholder="Insert a value"
+                                name="cost"
+                                type="text"
+                                pattern="[0-9]*([.][0-9]{0,2})?"
+                                className="form__cost input"
+                                value={form.cost === 0 ? '' : form.cost}
+                                onChange={e => change('cost', e.target.value)}
+                                onClick={() => {
+                                    if (form.cost === 0) {
+                                        change('cost', '');
+                                    }
+                                }}
+                            />
+                            {
+                                correctCost &&
+                                <motion.div
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={variantsLeft}
+                                    transition={{duration: 0.8}}
+                                >
+                                    <img src={el7} className="check__icon" alt=""/>
+                                </motion.div>
+                            }
+                        </div>
                     </div>
-                    <div className="check-edit">
-                        <select
-                            className="form__category input"
-                            name="category"
-                            value={form.category}
-                            onChange={e => change('category', e.target.value)}>
-                            <option value="">Choose a category</option>
-                            {categories.map((category) => {
-                                return (<option value={category}>{category}</option>)
-                            })}
-                        </select>
-                        {
-                            correctCategory &&
-                            <motion.div
-                                initial="hidden"
-                                animate="visible"
-                                variants={variantsLeft}
-                                transition={{duration: 0.8}}
-                            >
-                                <img src={el7} className="check__icon" alt=""/>
-                            </motion.div>
-                        }
-                    </div>
-                </div>
-                <div>
-                    <div className="label" style={{color: "#3498db"}}>
-                        <img className="desc-icon" src={el3} alt=""/>
-                        Cost{changedCost && '*'}: <br/>
-                    </div>
-                    <div className="check-edit">
-                        <input
-                            placeholder="Insert a value"
-                            name="cost"
-                            type="text"
-                            pattern="[0-9]*([.][0-9]{0,2})?"
-                            className="form__cost input"
-                            value={form.cost === 0 ? '' : form.cost}
-                            onChange={e => change('cost', e.target.value)}
-                            onClick={() => {
-                                if (form.cost === 0) {
-                                    change('cost', '');
-                                }
-                            }}
-                        />
-                        {
-                            correctCost &&
-                            <motion.div
-                                initial="hidden"
-                                animate="visible"
-                                variants={variantsLeft}
-                                transition={{duration: 0.8}}
-                            >
-                                <img src={el7} className="check__icon" alt=""/>
-                            </motion.div>
-                        }
-                    </div>
-                </div>
-                <div>
-                    <div className="label" style={{color: "#3498db"}}>
-                        <img className="desc-icon" src={el4} alt=""/>
-                        Date{changedMonth && '*'}: <br/>
-                    </div>
-                    <div className="check-edit">
-                        <input
-                            name="months"
-                            type="date"
-                            className="form__date input"
-                            value={form.month}
-                            onChange={e => change('month', e.target.value)}
-                        />
-                        {
-                            correctMonth &&
-                            <motion.div
-                                initial="hidden"
-                                animate="visible"
-                                variants={variantsLeft}
-                                transition={{duration: 0.8}}
-                            >
-                                <img src={el7} className="check__icon" alt=""/>
-                            </motion.div>
-                        }
+                    <div>
+                        <div className="label" style={{color: "#3498db"}}>
+                            <img className="desc-icon" src={el4} alt=""/>
+                            Date{changedMonth && '*'}: <br/>
+                        </div>
+                        <div className="check-edit">
+                            <input
+                                name="months"
+                                type="date"
+                                className="form__date input"
+                                value={form.month}
+                                onChange={e => change('month', e.target.value)}
+                            />
+                            {
+                                correctMonth &&
+                                <motion.div
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={variantsLeft}
+                                    transition={{duration: 0.8}}
+                                >
+                                    <img src={el7} className="check__icon" alt=""/>
+                                </motion.div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div className="wrapper-div__textareas">
-            <div className="label" style={{color: "#3498db"}}>
-                <img className="desc-icon" src={el5} alt=""/>
-                Notes{changedNotes && '*'}: <br/>
+            <div className="wrapper-div__textareas">
+                <div className="label" style={{color: "#3498db"}}>
+                    <img className="desc-icon" src={el5} alt=""/>
+                    Notes{changedNotes && '*'}: <br/>
+                </div>
+                <textarea
+                    placeholder="Add notes"
+                    name="notes"
+                    className="form__notess input"
+                    value={form.notes}
+                    rows={3}
+                    cols={81}
+                    style={{resize: "none"}}
+                    onChange={e => change('notes', e.target.value)}/>
             </div>
-            <textarea
-                placeholder="Add notes"
-                name="notes"
-                className="form__notess input"
-                value={form.notes}
-                rows={3}
-                cols={81}
-                style={{resize: "none"}}
-                onChange={e => change('notes', e.target.value)}/>
-        </div>
             <div className="buttonss">
                 <button
                     type="button"
@@ -420,8 +422,6 @@ export const ExpenseDetailsPanel = (props: Props) => {
 
     return (
         <div className="whole-panel">
-            <a href='#' className="close-button" onClick={props.onClose}></a>
-            <h2>{original.name} Details</h2>
             {deleted ? deletedExpense : editForm}
         </div>
     );

@@ -219,8 +219,8 @@
     margin: 5px 0 5px 0;
     font-weight: 0;
     font-size: 13px;
-    background-color: #fff;
-    color: rgb(13, 16, 16);
+    background-color: black;
+    color: white;
     padding: 8px 20px;
     border-radius: 10px;
     transition : 1000ms;
@@ -243,7 +243,7 @@
     width: 100%;
     font-weight: 0;
     font-size: 13px;
-    background-color: #fff;
+    background-color: #3498db;
     color: rgb(13, 16, 16);
     padding: 8px 20px;
     border-radius: 10px;
@@ -306,6 +306,7 @@ input[type="number"] {
 }
 
 .deleted-expense {
+  height: 100vh;
   display: flex;
   flex-direction: row;
   align-items: center;
