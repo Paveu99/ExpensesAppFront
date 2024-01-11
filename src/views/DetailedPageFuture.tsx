@@ -15,8 +15,9 @@ import {SearchContext} from "../components/search/SearchContext";
 import { ExpenseEntity } from 'types';
 import ReactPaginate from "react-js-pagination";
 import {SearchComponent} from "../components/search/SearchComponent";
+import {ExpenseDetailsPanelFuture} from "../components/expenses/DetailedInfoFuture";
 export const DetailedPageFuture = () => {
-    const {allFutureRecords, summaryFuture, groupedByDateFuture, fetchFutureRecords } = useRecordContext();
+    const {allFutureRecords, summaryFuture, fetchFutureRecords } = useRecordContext();
 
     const {search, setSearch} = useContext(SearchContext);
 
@@ -35,6 +36,16 @@ export const DetailedPageFuture = () => {
     const [isHovered4, setIsHovered4] = useState(false);
 
     const [option, setOption] = useState<string>('Old');
+
+    const [selectedExpense, setSelectedExpense] = useState<ExpenseEntity | null>(null);
+
+    const handleExpenseClick = (expense: ExpenseEntity) => {
+        setSelectedExpense(expense);
+    };
+
+    const handleClosePanel = () => {
+        setSelectedExpense(null);
+    };
 
     const handleMouseEnter1 = () => {
         setIsHovered1(true);
@@ -221,7 +232,7 @@ export const DetailedPageFuture = () => {
                     </thead>
                     <tbody>
                     {currentExpenses.map((row, rowIndex) => (
-                        <tr key={rowIndex}>
+                        <tr key={rowIndex} onClick={() => handleExpenseClick(row)}>
                             <td key={row['id']}>{row['name']}</td>
                             <td key={row['category']}>{row['category']}</td>
                             <td key={row['cost']}>{row['cost']}</td>
@@ -344,6 +355,15 @@ export const DetailedPageFuture = () => {
             <DownloadButton color="yellow" name={`Planned expenses` as string} trades={shownData}/>
         </div>
         <hr className="other-hr"/>
+        <div className={`overlay${selectedExpense ? ' show' : ''}`} onClick={handleClosePanel}></div>
+        <div className={`expense-details-panel${selectedExpense ? ' show' : ''}`}>
+            {selectedExpense && (
+                <ExpenseDetailsPanelFuture
+                    expense={selectedExpense}
+                    onClose={handleClosePanel}
+                />
+            )}
+        </div>
         {shownData.length === 0 ? noResults : allExpenses}
     </div>
 }

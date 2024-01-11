@@ -215,7 +215,7 @@
     background-color: #3a3a3a;
   }
 
-  &__delete{
+  &__delete-future{
     margin: 5px 0 5px 0;
     font-weight: 0;
     font-size: 13px;
@@ -231,14 +231,38 @@
     border: none;
   }
 
-  &__delete:hover{
+  &__delete-future:hover{
     transition : 200ms;
     transform : translateY(-0px);
     color: #fff;
     background-color: #3a3a3a;
   }
 
-  &__back{
+  &__back-future{
+    margin: 5px 0;
+    width: 100%;
+    font-weight: 0;
+    font-size: 13px;
+    background-color: rgba(213, 219, 52, 0.77);
+    color: rgb(13, 16, 16);
+    padding: 8px 20px;
+    border-radius: 10px;
+    transition : 1000ms;
+    transform: translateY(0);
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+  }
+
+  &__back-future:hover {
+    transition : 200ms;
+    transform : translateY(-0px);
+    color: #fff;
+    background-color: #3a3a3a;
+  }
+
+  &__move-future {
     margin: 5px 0;
     width: 100%;
     font-weight: 0;
@@ -255,7 +279,7 @@
     border: none;
   }
 
-  &__back:hover{
+  &__move-future:hover {
     transition : 200ms;
     transform : translateY(-0px);
     color: #fff;

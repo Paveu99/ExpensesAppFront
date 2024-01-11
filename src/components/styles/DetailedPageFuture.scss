@@ -220,3 +220,52 @@ thead tr th:hover {
   background-color: white;;
   border: solid 2px rgba(213, 219, 52, 0.77);
 }
+
+.failure {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 101;
+  display: none;
+}
+
+.expense-details-panel.show,
+.overlay.show {
+  display: block;
+}
+
+.detailed-month {
+  position: relative;
+}
+
+.overlay::before {
+  content: '';
+  position: absolute;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(1px);
+}
+
+.expense-details-panel {
+  z-index: 102;
+  position: fixed;
+  top: 0;
+  right: -350px;
+  bottom: 0;
+  width: 350px;
+  background-color: #171717;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+  transition: right 0.3s ease;
+}
+
+.expense-details-panel.show {
+  right: 0;
+}

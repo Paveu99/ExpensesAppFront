@@ -4,7 +4,7 @@ import el1 from "../components/styles/images/Back-arrow.png";
 import el2 from "../components/styles/images/Date.png";
 import "../components/styles/DetailedMonth.scss"
 import {useRecordContext} from "../components/context/RecordContext";
-import ReactPaginate, { ReactJsPaginationProps } from 'react-js-pagination';
+import ReactPaginate from 'react-js-pagination';
 import {SearchComponent} from "../components/search/SearchComponent";
 import { ExpenseEntity } from "types";
 import {SearchContext} from "../components/search/SearchContext";
