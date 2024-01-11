@@ -12,6 +12,7 @@ import {DownloadButton} from "../components/download/DownloadButton";
 import el3 from "../components/styles/images/Sum.png";
 import el4 from "../components/styles/images/Category.png";
 import el5 from "../components/styles/images/Top.png";
+import {ExpenseDetailsPanel} from "../components/expenses/DetailedInfo";
 
 
 export const DetailedPageMonth = () => {
@@ -37,6 +38,16 @@ export const DetailedPageMonth = () => {
     const [isHovered3, setIsHovered3] = useState(false);
 
     const [option, setOption] = useState<string>('Old');
+
+    const [selectedExpense, setSelectedExpense] = useState<ExpenseEntity | null>(null);
+
+    const handleExpenseClick = (expense: ExpenseEntity) => {
+        setSelectedExpense(expense);
+    };
+
+    const handleClosePanel = () => {
+        setSelectedExpense(null);
+    };
 
     const handleMouseEnter1 = () => {
         setIsHovered1(true);
@@ -169,7 +180,7 @@ export const DetailedPageMonth = () => {
         <>
             <div className="month-content">
                 {currentExpenses.map((expense, index) => (
-                    <div className="single-expense" key={index}>
+                    <div className="single-expense" key={index} onClick={() => handleExpenseClick(expense)}>
                         <div className="left">
                             <div>
                                 {expense.name}
@@ -288,6 +299,15 @@ export const DetailedPageMonth = () => {
                 <DownloadButton color="blue" name={`${month}_${year}` as string} trades={shownData}/>
             </div>
             <hr className="other-hr"/>
+            <div className={`overlay${selectedExpense ? ' show' : ''}`} onClick={handleClosePanel}></div>
+            <div className={`expense-details-panel${selectedExpense ? ' show' : ''}`}>
+                {selectedExpense && (
+                    <ExpenseDetailsPanel
+                        expense={selectedExpense}
+                        onClose={handleClosePanel}
+                    />
+                )}
+            </div>
             {shownData.length === 0 ? noResults : allExpenses}
         </div>
     )
