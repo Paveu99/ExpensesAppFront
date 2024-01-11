@@ -302,7 +302,10 @@ export const DetailedPageMonth = () => {
             <div className={`overlay${selectedExpense ? ' show' : ''}`} onClick={handleClosePanel}></div>
             <div className={`expense-details-panel${selectedExpense ? ' show' : ''}`}>
                 {selectedExpense && (
-                    <ExpenseDetailsPanel expense={selectedExpense} onClose={handleClosePanel}/>
+                    <ExpenseDetailsPanel
+                        expense={selectedExpense}
+                        onClose={handleClosePanel}
+                    />
                 )}
             </div>
             {shownData.length === 0 ? noResults : allExpenses}
