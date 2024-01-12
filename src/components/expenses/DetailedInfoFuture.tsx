@@ -166,7 +166,7 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
         visible: { opacity: 1, x: 0 },
     };
 
-    const addedExpense = <motion.div
+    const diffExpense = <motion.div
         className="changed-expense"
         initial="hidden"
         animate="visible"
@@ -382,7 +382,7 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
                     </div>
                 </div>
             </div>
-            <div className="wrapper-div__textareas">
+            <div className="wrapper-div__textareass">
                 <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
                     <img className="desc-icon" src={el5} alt=""/>
                     Notes{changedNotes && '*'}: <br/>
@@ -437,11 +437,11 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
                     Move to past expenses
                 </button>
             </div>
+            {
+                submitted
+                && diffExpense
+            }
         </form>
-        {
-            submitted
-            && addedExpense
-        }
     </>
 
     return (

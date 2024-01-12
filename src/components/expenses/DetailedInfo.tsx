@@ -149,7 +149,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
         visible: { opacity: 1, x: 0 },
     };
 
-    const addedExpense = <motion.div
+    const diffExpense = <motion.div
         className="changed-expense"
         initial="hidden"
         animate="visible"
@@ -413,11 +413,11 @@ export const ExpenseDetailsPanel = (props: Props) => {
                     Delete
                 </button>
             </div>
+            {
+                submitted
+                && diffExpense
+            }
         </form>
-        {
-            submitted
-            && addedExpense
-        }
     </>
 
     return (
