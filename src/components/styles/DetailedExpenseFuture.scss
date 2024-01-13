@@ -285,6 +285,25 @@
     color: #fff;
     background-color: #3a3a3a;
   }
+
+  &__move-future-disabled{
+    cursor: not-allowed;
+    pointer-events: none;
+    width: 100%;
+    font-size: 13px;
+    margin: 5px 0 5px 0;
+    font-weight: 0;
+    background-color: #ff0000;
+    color: rgb(13, 16, 16);
+    box-shadow: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    transition : 1000ms;
+    transform: translateY(0);
+    flex-direction: row;
+    align-items: center;
+    border: none;
+  }
 }
 
 .check-edit {
