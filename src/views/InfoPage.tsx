@@ -16,6 +16,7 @@ import el8 from '../components/styles/screens/Month.png';
 import el9 from '../components/styles/screens/Edit past.png';
 import el10 from '../components/styles/screens/All planned.png';
 import el11 from '../components/styles/screens/Edit planned.png';
+import {Image} from "../components/info/InfoPopUp";
 
 export const InfoPage = () => {
   return <div className="info-page">
@@ -52,16 +53,17 @@ export const InfoPage = () => {
           <AnimatedSlide>
               <div className="tour-guide">
                   <h1 style={{fontSize: "60px", paddingTop: "30px"}}>Tour guide</h1>
+                  <p>Just click on an image to see more</p>
                   <div className="container">
                       <div className="one">
-                          <img src={el1} alt="" style={{width: "100%"}}/>
+                          <Image src={el1} alt="Add an expense" description="A from that can either add a future expense or add old expense as a historic record. Form dynamically check input and shows you green checkmarks if conditions are met."></Image>
                           <p className="what">Add an expense</p>
                       </div>
                       <div className="two">
                           <img src={el2} alt="" style={{width: "100%"}}/>
                       </div>
                       <div className="three">
-                          <img src={el3} alt="" style={{width: "100%"}}/>
+                          <Image src={el3} alt="Choose type" description="In this step you can either choose the past expenses or the planned ones to work with."></Image>
                           <p className="what">Past or future?</p>
                       </div>
                       <div className="four">
@@ -71,39 +73,39 @@ export const InfoPage = () => {
                           <img src={el5} alt="" style={{width: "100%"}} className="arrowdown"/>
                       </div>
                       <div className="six">
-                          <img src={el6} alt="" style={{width: "100%"}}/>
+                          <Image src={el6} alt="All time view" description="All time overall statistics are displayed on the screen with years to choose from. In all of the views a Excel type report can be downloaded just by clicking on icon."></Image>
                           <p className="what">All time view</p>
                       </div>
                       <div className="seven">
                           <img src={el2} alt="" style={{width: "100%"}}/>
                       </div>
                       <div className="eight">
-                          <img src={el7} alt="" style={{width: "100%"}}/>
+                          <Image src={el7} alt="Year view" description="After choosing a year, the overall stats for that year are shown with months that have added expenses which can be clicked on and moved to a another view."></Image>
                           <p className="what">Year view</p>
                       </div>
                       <div className="nine">
                           <img src={el2} alt="" style={{width: "100%"}}/>
                       </div>
                       <div className="ten">
-                          <img src={el8} alt="" style={{width: "100%"}}/>
+                          <Image src={el8} alt="Month view" description="After choosing a month, all the expenses that were added to this month are displayed, overall stats can be alos seen on the screen. By clicking on a expense user can trigger edit form to chenge or delete expense."></Image>
                           <p className="what">Month view</p>
                       </div>
                       <div className="eleven">
                           <img src={el2} alt="" style={{width: "100%"}}/>
                       </div>
                       <div className="twelve">
-                          <img src={el9} alt="" style={{width: "100%"}}/>
+                          <Image src={el9} alt="Edit view" description="Form that allows user to manipulate already existing data. It can be either deleted or simply changed. After making any changes a button with 'Update Expense' will be unlocked, which means that a change can be saved."></Image>
                           <p className="what">Edit view</p>
                       </div>
                       <div className="thirteen">
-                          <img src={el10} alt="" style={{width: "100%"}}/>
+                          <Image src={el10} alt="All planned expenses view" description="A view with overall stats for planned expenses and a table that contains all of them. By clicking on singular expense an edit form is trigggered. Data can be filtered by clicking on the head of every colummn. If we would like to come back to the default view a reset button will pop up and by clicking on it you can go back."></Image>
                           <p className="what">All planned expenses view</p>
                       </div>
                       <div className="fourteen">
                           <img src={el2} alt="" style={{width: "100%"}}/>
                       </div>
                       <div className="fifteen">
-                          <img src={el11} alt="" style={{width: "100%"}}/>
+                          <Image src={el11} alt="Edit future expenses view" description="This edit form can be described as a mirror reflection of edit form for past expenses, but with a little twist which is a functionality that allows user to automatically move expenses that are overdue to the past expepenses."></Image>
                           <p className="what">Edit future expenses view</p>
                       </div>
                   </div>
@@ -112,7 +114,7 @@ export const InfoPage = () => {
       </SwiperSlide>
         <SwiperSlide>
             <AnimatedSlide>
-                Maybe some sort of videos
+                Demo
             </AnimatedSlide>
         </SwiperSlide>
     </Swiper>
