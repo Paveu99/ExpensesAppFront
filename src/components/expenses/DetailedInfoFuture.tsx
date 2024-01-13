@@ -52,7 +52,7 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
     const [changedCost, setChangedCost] = useState<boolean>(false);
     const [changedMonth, setChangedMonth] = useState<boolean>(false);
     const [changedNotes, setChangedNotes] = useState<boolean>(false);
-
+    const [moved, setMoved] = useState<boolean>(false);
 
     const change = (key: string, value: any) => {
 
@@ -70,14 +70,7 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
             setCorrectCost(value > 0);
         }
         if (key === 'month') {
-            const dateObject = new Date(value);
-
-            const today = new Date();
-            if (dateObject >= today) {
-                setCorrectMonth(!!value);
-            } else {
-                setCorrectMonth(false);
-            }
+            setCorrectMonth(!!value);
         }
     };
 
@@ -220,6 +213,14 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
     };
 
     useEffect(() => {
+        const dateObject = new Date(original.month);
+
+        const today = new Date();
+        if (dateObject >= today) {
+            setMoved(false);
+        } else {
+            setMoved(true);
+        }
         if (form.cost !== original.cost) {
             setChangedCost(true);
         } else {
@@ -431,7 +432,11 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
                 </button>
                 <button
                     type="button"
-                    className="buttonss__move-future"
+                    className={
+                        moved
+                            ? "buttonss__move-future"
+                            : "buttonss__move-future-disabled"
+                    }
                     onClick={moveExpense}
                 >
                     Move to past expenses
