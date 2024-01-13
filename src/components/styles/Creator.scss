@@ -1,0 +1,77 @@
+.creator {
+  height: 100vh;
+  text-align: center;
+}
+
+.swiper-pagination-bullet {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  color: #000;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff;
+  background: white;
+}
+
+
+.swiper {
+  width: 100%;
+  height: 100vh;
+}
+
+.swiper-slide {
+  text-align: center;
+  height: 100vh;
+  background-color: #1c1c1c;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-img {
+  width: 25%;
+  min-width: 200px;
+  border-radius: 20px;
+}
+
+.description {
+  width: 50%;
+  display: flex;
+  text-align: justify;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-left: 30px;
+  border-radius: 20px;
+  font-size: 25px;
+}
+
+.intro {
+  font-size: 70px
+}
+
+.gmail-img {
+  width: 50%;
+  min-width: 200px;
+  border-radius: 20px;
+}
+
+.github-img {
+  width: 25%;
+  min-width: 200px;
+  border-radius: 20px;
+}

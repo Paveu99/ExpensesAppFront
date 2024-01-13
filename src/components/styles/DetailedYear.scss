@@ -1,0 +1,47 @@
+.detailed-year {
+  height: 100vh;
+  position: relative;
+}
+
+.your-button-in-top-right {
+  position: absolute;
+  top: 22px;
+  right: 16px;
+}
+
+.year-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-icon {
+  height: 3rem;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.year-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 16px;
+  grid-row-gap: 1px;
+}
+
+.month {
+  background-color: rgb(56, 56, 56);
+  display: flex;
+  flex-direction: row;
+  color: white;
+  align-items: center;
+  text-decoration: none;
+  padding-left: 10px;
+  margin-bottom: 16px;
+  height: 40px;
+  border-radius: 10px
+}
+
+.month:hover {
+  background-color: rgba(255, 255, 255, 0.44);
+}

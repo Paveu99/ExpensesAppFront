@@ -1,6 +1,6 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import { ExpenseEntity } from 'types';
-import '../styles/DetailedExpense.scss'
+import '../styles/DetailedExpenseFuture.scss'
 import {useRecordContext} from "../context/RecordContext";
 import {motion} from "framer-motion";
 import el8 from "../styles/images/Alert.png";
@@ -16,9 +16,9 @@ interface Props {
     onClose: () => void;
 }
 
-export const ExpenseDetailsPanel = (props: Props) => {
+export const ExpenseDetailsPanelFuture = (props: Props) => {
 
-    const {fetchRecords, fetchYearSummary, fetchMonthSummary} = useRecordContext();
+    const { fetchFutureRecords } = useRecordContext();
 
     const categories: string[] = [
         "Food",
@@ -43,16 +43,16 @@ export const ExpenseDetailsPanel = (props: Props) => {
     const [correctMonth, setCorrectMonth] = useState<boolean>(true);
     const [correctAll, setCorrectAll] = useState<boolean>(true);
     const [submitted, setSubmitted] = useState<boolean>(false);
-    const [deleted, setDeleted] = useState<boolean>();
+    const [dif, setDif] = useState<boolean>();
     const [expenseInfo, setExpenseInfo] = useState<string>('');
-    const [deletedExpenseInfo, setDeletedExpenseInfo] = useState<string>('');
+    const [changedExpenseInfo, setChangedExpenseInfo] = useState<string>('');
     const [changed, setChanged] = useState<boolean>(false);
     const [changedName, setChangedName] = useState<boolean>(false);
     const [changedCategory, setChangedCategory] = useState<boolean>(false);
     const [changedCost, setChangedCost] = useState<boolean>(false);
     const [changedMonth, setChangedMonth] = useState<boolean>(false);
     const [changedNotes, setChangedNotes] = useState<boolean>(false);
-
+    const [moved, setMoved] = useState<boolean>(false);
 
     const change = (key: string, value: any) => {
 
@@ -70,14 +70,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
             setCorrectCost(value > 0);
         }
         if (key === 'month') {
-            const dateObject = new Date(value);
-
-            const today = new Date();
-            if (dateObject <= today) {
-                setCorrectMonth(!!value);
-            } else {
-                setCorrectMonth(false);
-            }
+            setCorrectMonth(!!value);
         }
     };
 
@@ -91,7 +84,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
         if (correctAll) {
             setSubmitted(true)
             try {
-                const res = await fetch(`http://localhost:3001/expenses/edit/${props.expense.id}`, {
+                const res = await fetch(`http://localhost:3001/plannedExpenses/edit/${props.expense.id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -100,12 +93,8 @@ export const ExpenseDetailsPanel = (props: Props) => {
                 });
                 const data = await res.json();
                 setExpenseInfo(`${data.newExpense.name} was changed`);
-                const dateString = data.newExpense.month;
-                const [year, month, day] = dateString.split('-');
                 changeOriginal()
-                fetchRecords();
-                fetchYearSummary(year);
-                fetchMonthSummary(year, month);
+                fetchFutureRecords();
                 setTimeout(() => {
                     setSubmitted(false);
                 }, 3500);
@@ -117,7 +106,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
 
     const deleteExpense = async () => {
         try {
-            const res = await fetch(`http://localhost:3001/expenses/delete/${props.expense.id}`, {
+            const res = await fetch(`http://localhost:3001/plannedExpenses/delete/${props.expense.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -128,14 +117,35 @@ export const ExpenseDetailsPanel = (props: Props) => {
                 alert(`Error occured: ${error.message}`);
                 return
             }
-            setDeleted(true);
+            setDif(true);
             const data = await res.json();
-            setDeletedExpenseInfo(`${data.newExpense.name} was deleted`);
-            const dateString = data.newExpense.month;
-            const [year, month, day] = dateString.split('-');
-            fetchRecords();
-            fetchYearSummary(year);
-            fetchMonthSummary(year, month);
+            setChangedExpenseInfo(`${data.newExpense.name} was deleted`);
+            fetchFutureRecords();
+            setTimeout(() => {
+                props.onClose();
+            }, 2000);
+        } catch (error) {
+            console.error('Error deleting record:', error);
+        }
+    };
+
+    const moveExpense = async () => {
+        try {
+            const res = await fetch(`http://localhost:3001/plannedExpenses/move/${props.expense.id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if ([400, 500].includes(res.status)) {
+                const error = await res.json();
+                alert(`Error occured: ${error.message}`);
+                return
+            }
+            setDif(true);
+            const data = await res.json();
+            setChangedExpenseInfo(`${data.message}`);
+            fetchFutureRecords();
             setTimeout(() => {
                 props.onClose();
             }, 2000);
@@ -160,7 +170,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
         <div style={{fontSize: "12px"}}>{expenseInfo}</div>
     </motion.div>
 
-    const deletedExpense = <motion.div
+    const changedExpense = <motion.div
         className="deleted-expense"
         initial="hidden"
         animate="visible"
@@ -168,7 +178,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
         transition={{duration: 1}}
     >
         <img src={el8} className="desc-icon" alt=""/>
-        <div style={{fontSize: "20px"}}>{deletedExpenseInfo}</div>
+        <div style={{fontSize: "20px"}}>{changedExpenseInfo}</div>
     </motion.div>
 
     const resetValues = () => {
@@ -203,6 +213,14 @@ export const ExpenseDetailsPanel = (props: Props) => {
     };
 
     useEffect(() => {
+        const dateObject = new Date(original.month);
+
+        const today = new Date();
+        if (dateObject >= today) {
+            setMoved(false);
+        } else {
+            setMoved(true);
+        }
         if (form.cost !== original.cost) {
             setChangedCost(true);
         } else {
@@ -244,12 +262,12 @@ export const ExpenseDetailsPanel = (props: Props) => {
 
     const editForm = <>
         <a href='#' className="close-button" onClick={props.onClose}></a>
-        <h2><span style={{color: "#3498db"}}>{original.name}</span> details:</h2>
+        <h2><span style={{color: "rgba(213, 219, 52, 0.77)"}}>{original.name}</span> details:</h2>
         <form autoComplete='off' className="form" onSubmit={checkInput}>
             <div className="wrapper-div">
                 <div className="wrapper-div__columns">
                     <div>
-                        <div className="label" style={{color: "#3498db"}}>
+                        <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
                             <img className="desc-icon" src={el1} alt=""/>
                             Name{changedName && '*'}: <br/>
                         </div>
@@ -276,7 +294,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
                         </div>
                     </div>
                     <div>
-                        <div className="label" style={{color: "#3498db"}}>
+                        <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
                             <img className="desc-icon" src={el2} alt=""/>
                             Category{changedCategory && '*'}: <br/>
                         </div>
@@ -305,7 +323,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
                         </div>
                     </div>
                     <div>
-                        <div className="label" style={{color: "#3498db"}}>
+                        <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
                             <img className="desc-icon" src={el3} alt=""/>
                             Cost{changedCost && '*'}: <br/>
                         </div>
@@ -338,7 +356,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
                         </div>
                     </div>
                     <div>
-                        <div className="label" style={{color: "#3498db"}}>
+                        <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
                             <img className="desc-icon" src={el4} alt=""/>
                             Date{changedMonth && '*'}: <br/>
                         </div>
@@ -365,8 +383,8 @@ export const ExpenseDetailsPanel = (props: Props) => {
                     </div>
                 </div>
             </div>
-            <div className="wrapper-div__textareas">
-                <div className="label" style={{color: "#3498db"}}>
+            <div className="wrapper-div__textareass">
+                <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
                     <img className="desc-icon" src={el5} alt=""/>
                     Notes{changedNotes && '*'}: <br/>
                 </div>
@@ -383,7 +401,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
             <div className="buttonss">
                 <button
                     type="button"
-                    className="buttonss__back"
+                    className="buttonss__back-future"
                     onClick={backToDefaultValues}
                 >
                     Back to default values
@@ -407,10 +425,21 @@ export const ExpenseDetailsPanel = (props: Props) => {
                 </button>
                 <button
                     type="button"
-                    className="buttonss__delete"
+                    className="buttonss__delete-future"
                     onClick={deleteExpense}
                 >
                     Delete
+                </button>
+                <button
+                    type="button"
+                    className={
+                        moved
+                            ? "buttonss__move-future"
+                            : "buttonss__move-future-disabled"
+                    }
+                    onClick={moveExpense}
+                >
+                    Move to past expenses
                 </button>
             </div>
             {
@@ -422,7 +451,7 @@ export const ExpenseDetailsPanel = (props: Props) => {
 
     return (
         <div className="whole-panel">
-            {deleted ? deletedExpense : editForm}
+            {dif ? changedExpense : editForm}
         </div>
     );
 };

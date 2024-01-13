@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect, useMemo} from "react";
 import Lottie from "react-lottie";
 import el1 from "../components/styles/images/Animation.json";
 import { motion } from 'framer-motion';
 import "../components/styles/Home.scss"
+import {useRecordContext} from "../components/context/RecordContext";
 
 export const HomePage = () => {
 
@@ -20,21 +21,27 @@ export const HomePage = () => {
     },
   };
 
-  const red = <span className="e1__red">100000$</span>
+  const { summary, fetchRecords } = useRecordContext();
+
+  useEffect(() => {
+    fetchRecords();
+  }, []);
+
+  const memoizedSummary = useMemo(() => summary, [summary]);
 
   return <div
         className="home"
     >
-      <motion.div
-          className="e1"
-          initial="hidden"
-          animate="visible"
-          variants={variantsLeft}
-          transition={{ duration: 2 }}
-      >
-        So far you have spent: {red} this year
-      </motion.div>
-      <div className="e2" style={{pointerEvents: "none"}}>
+    <motion.div
+        className="e1"
+        initial="hidden"
+        animate="visible"
+        variants={variantsLeft}
+        transition={{duration: 2}}
+    >
+      So far you have spent: <span className="e1__red">{memoizedSummary.sum}$</span>
+    </motion.div>
+    <div className="e2" style={{pointerEvents: "none"}}>
         <div className="e2__lottie">
           <Lottie
               options={defaultOptions}
@@ -47,7 +54,7 @@ export const HomePage = () => {
           animate="visible"
           variants={variantsLeft}
           transition={{ duration: 2, delay: 1}}
-      >You spend the most money on: <div style={{"color": "red"}}>Food</div>
+      >You spend the most money on: <div style={{"color": "red"}}>{memoizedSummary.categoryMost}</div>
       </motion.div>
       <motion.div
           className="e4"
@@ -55,7 +62,7 @@ export const HomePage = () => {
           animate="visible"
           variants={variantsLeft}
           transition={{ duration: 2, delay: 1 }}
-      >Month when you spend the most amount of money was: <br/><div style={{"color": "red"}}>December</div>
+      >Month when you spend the most amount of money was: <br/><div style={{"color": "red"}}>{memoizedSummary.monthMost}</div>
       </motion.div>
       <motion.div
           className="e5"
@@ -63,7 +70,7 @@ export const HomePage = () => {
           animate="visible"
           variants={variantsLeft}
           transition={{ duration: 2, delay: 1 }}
-      >Your last purchase was: <div style={{"color": "red"}} >Kebab</div>
+      >Your latest purchase was: <div style={{"color": "red"}} >{summary.latest}</div>
       </motion.div>
     </div>
 }
