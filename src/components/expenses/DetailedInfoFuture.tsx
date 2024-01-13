@@ -52,7 +52,7 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
     const [changedCost, setChangedCost] = useState<boolean>(false);
     const [changedMonth, setChangedMonth] = useState<boolean>(false);
     const [changedNotes, setChangedNotes] = useState<boolean>(false);
-
+    const [moved, setMoved] = useState<boolean>(false);
 
     const change = (key: string, value: any) => {
 
@@ -70,14 +70,7 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
             setCorrectCost(value > 0);
         }
         if (key === 'month') {
-            const dateObject = new Date(value);
-
-            const today = new Date();
-            if (dateObject >= today) {
-                setCorrectMonth(!!value);
-            } else {
-                setCorrectMonth(false);
-            }
+            setCorrectMonth(!!value);
         }
     };
 
@@ -166,7 +159,7 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
         visible: { opacity: 1, x: 0 },
     };
 
-    const addedExpense = <motion.div
+    const diffExpense = <motion.div
         className="changed-expense"
         initial="hidden"
         animate="visible"
@@ -220,6 +213,14 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
     };
 
     useEffect(() => {
+        const dateObject = new Date(original.month);
+
+        const today = new Date();
+        if (dateObject >= today) {
+            setMoved(false);
+        } else {
+            setMoved(true);
+        }
         if (form.cost !== original.cost) {
             setChangedCost(true);
         } else {
@@ -382,7 +383,7 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
                     </div>
                 </div>
             </div>
-            <div className="wrapper-div__textareas">
+            <div className="wrapper-div__textareass">
                 <div className="label" style={{color: "rgba(213, 219, 52, 0.77)"}}>
                     <img className="desc-icon" src={el5} alt=""/>
                     Notes{changedNotes && '*'}: <br/>
@@ -431,17 +432,21 @@ export const ExpenseDetailsPanelFuture = (props: Props) => {
                 </button>
                 <button
                     type="button"
-                    className="buttonss__move-future"
+                    className={
+                        moved
+                            ? "buttonss__move-future"
+                            : "buttonss__move-future-disabled"
+                    }
                     onClick={moveExpense}
                 >
                     Move to past expenses
                 </button>
             </div>
+            {
+                submitted
+                && diffExpense
+            }
         </form>
-        {
-            submitted
-            && addedExpense
-        }
     </>
 
     return (

@@ -23,6 +23,7 @@ export const AnimatedSlide = (children: AnimatedSlideProps ) => {
             animate={inView ? 'visible' : 'hidden'}
             variants={variants}
             transition={{ duration: 2 }}
+            style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
         >
             {children.children}
         </motion.div>

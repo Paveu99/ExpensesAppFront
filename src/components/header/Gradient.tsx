@@ -25,9 +25,9 @@ export const MouseGradientText = (props: Props) => {
     }, []);
 
     const calculateGradient = (): string => {
-        const xPercentage = (mousePosition.x / window.innerWidth) * 100;
+        const xPercentage = (mousePosition.x / window.innerHeight) * 100;
 
-        return `linear-gradient(${xPercentage}deg, #ff0000 0%, #00ff00 60%, #0000ff 80%)`;
+        return `linear-gradient(${xPercentage}deg, #ff0000 20%, #00ff00 50%, #0000ff 80%)`;
     };
 
     return (
