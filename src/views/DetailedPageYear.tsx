@@ -9,6 +9,7 @@ import { ExpenseEntity } from "types";
 import el2 from "../components/styles/images/Calendar.png";
 import el3 from "../components/styles/images/Sum.png";
 import el4 from "../components/styles/images/Category.png";
+import {ExpenseChartYear} from "../components/charts/ExpenseChartYear";
 
 export const DetailedPageYear = () => {
     const { year } = useParams<{ year: string }>();
@@ -162,6 +163,7 @@ export const DetailedPageYear = () => {
                     </div>
                 </div>
             </div>
+            <ExpenseChartYear expensesGroupedByMonth={groupedByDate}></ExpenseChartYear>
         </div>
     );
 }
