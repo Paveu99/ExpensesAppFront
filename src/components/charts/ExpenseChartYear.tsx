@@ -39,7 +39,7 @@ export const ExpenseChartYear: React.FC<ExpenseChartProps> = ({ expensesGroupedB
     };
 
     return (
-        <div style={{ height: 'calc(100vh - 542px)' }}>
+        <div style={{ height: 'calc(100vh - 550px)' }}>
             <h2 style={{textAlign: "center"}}>Sum of expenses each year</h2>
             <ResponsiveContainer width="95%" height="100%" style={{margin: "auto"}}>
                 <BarChart data={data}>

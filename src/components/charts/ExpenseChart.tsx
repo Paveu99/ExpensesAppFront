@@ -34,7 +34,7 @@ export const ExpenseChart: React.FC<ExpenseChartProps> = ({ expensesGroupedByYea
     };
 
     return (
-        <div style={{ height: 'calc(100vh - 493px)' }}>
+        <div style={{ height: 'calc(100vh - 500px)' }}>
             <h2>Sum of expenses each year</h2>
             <ResponsiveContainer width="95%" height="100%" style={{margin: "auto"}}>
                 <BarChart data={data}>
