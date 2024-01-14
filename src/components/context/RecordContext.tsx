@@ -24,9 +24,14 @@ interface ExpensesGroupedByDate {
     };
 }
 
+interface GroupedExpenses {
+    [year: string]: ExpenseEntity[];
+}
+
 interface RecordContextProps {
     allRecords: ExpenseEntity[];
     groupedByDate: ExpensesGroupedByDate;
+    expensesGroupedByYear: GroupedExpenses;
     summary: Summary;
     summaryYear: Summary;
     summaryMonth: SummaryMonth;
@@ -48,6 +53,7 @@ interface RecordProviderProps {
 export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
     const [allRecords, setAllRecords] = useState<ExpenseEntity[]>([]);
     const [groupedByDate, setGroupedByDate] = useState<ExpensesGroupedByDate>({});
+    const [expensesGroupedByYear, setExpensesGroupedByYear] = useState<GroupedExpenses>({});
     const [summary, setSummary] = useState<Summary>({
         sum: 0,
         categoryMost: '',
@@ -105,6 +111,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
             const data = await response.json();
             setAllRecords(data.allExpenses);
             setGroupedByDate(data.expensesGroupedByDate);
+            setExpensesGroupedByYear(data.expensesGroupedByYear);
             setSummary(data.summary);
         } catch (error) {
             console.error('Error fetching records:', error);
@@ -148,6 +155,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         fetchRecords,
         fetchYearSummary,
         fetchMonthSummary,
+        expensesGroupedByYear,
         allFutureRecords,
         groupedByDateFuture,
         summaryFuture,
