@@ -2,15 +2,6 @@ import React, {useMemo} from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ExpenseEntity } from 'types';
 
-interface Expense {
-    id: string;
-    category: string;
-    name: string;
-    cost: number;
-    month: string;
-    notes: string;
-}
-
 interface GroupedExpenses {
     [year: string]: ExpenseEntity[];
 }

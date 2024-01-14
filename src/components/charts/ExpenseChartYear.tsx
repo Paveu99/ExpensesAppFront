@@ -3,15 +3,6 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 import { ExpenseEntity } from 'types';
 import {useParams} from "react-router-dom";
 
-interface Expense {
-    id: string;
-    category: string;
-    name: string;
-    cost: number;
-    month: string;
-    notes: string;
-}
-
 interface ExpensesGroupedByDate {
     [year: string]: {
         [month: string]: ExpenseEntity[];
