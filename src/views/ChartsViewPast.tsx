@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {useRecordContext} from "../components/context/RecordContext";
-import {ExpensePieChart} from "../components/charts/PieChart";
-import {HistogramComponent} from "../components/charts/HistogramChart";
+import {PieChartPast} from "../components/charts/PieChartPast";
+import {HistogramChartPast} from "../components/charts/HistogramChartPast";
 import '../components/styles/Charts.scss';
-import {ExpenseChartPast} from "../components/charts/ExpenseChartPast";
+import {LinearChartPast} from "../components/charts/LinearChartPast";
 
 export const ChartsViewPast = () => {
 
@@ -15,13 +15,13 @@ export const ChartsViewPast = () => {
 
     return <div className="chart-view-past">
         <div style={{marginBottom: "100px"}}>
-            <ExpenseChartPast expensesGroupedByYear={expensesGroupedByYear}/>
+            <LinearChartPast expensesGroupedByYear={expensesGroupedByYear}/>
         </div>
         <div style={{marginBottom: "100px"}}>
-            <ExpensePieChart allExpenses={allRecords}/>
+            <PieChartPast allExpenses={allRecords}/>
         </div>
         <div style={{marginBottom: "100px"}}>
-            <HistogramComponent data={allRecords}/>
+            <HistogramChartPast data={allRecords}/>
         </div>
     </div>
 }
