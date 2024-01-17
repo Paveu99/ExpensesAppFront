@@ -13,15 +13,17 @@ export const ChartsViewPast = () => {
         fetchRecords();
     }, []);
 
-    return <div className="chart-view-past">
-        <div style={{marginBottom: "100px"}}>
-            <LinearChartPast expensesGroupedByYear={expensesGroupedByYear}/>
+    return <>
+        <div className="chart-view-past">
+            <div style={{marginBottom: "100px"}}>
+                <LinearChartPast expensesGroupedByYear={expensesGroupedByYear}/>
+            </div>
+            <div style={{marginBottom: "100px"}}>
+                <PieChartPast allExpenses={allRecords}/>
+            </div>
+            <div style={{marginBottom: "100px"}}>
+                <HistogramChartPast data={allRecords}/>
+            </div>
         </div>
-        <div style={{marginBottom: "100px"}}>
-            <PieChartPast allExpenses={allRecords}/>
-        </div>
-        <div style={{marginBottom: "100px"}}>
-            <HistogramChartPast data={allRecords}/>
-        </div>
-    </div>
+    </>
 }
