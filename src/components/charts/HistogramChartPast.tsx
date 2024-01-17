@@ -42,7 +42,7 @@ export const HistogramChartPast: React.FC<HistogramProps> = ({ data }) => {
                     <XAxis dataKey="bin" />
                     <YAxis />
                     <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                    <Bar dataKey="Number of expenses" fill="#3498db" label={{ fill: 'white' }} />
+                    <Bar dataKey="Number of expenses" fill="#3498dbc4" label={{ fill: 'white' }} />
                     <Tooltip content={CustomTooltip}/>
                     <Legend />
                 </BarChart>
