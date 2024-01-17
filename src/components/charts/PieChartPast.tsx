@@ -37,16 +37,16 @@ export const PieChartPast: React.FC<Props> = ({ allExpenses }) => {
 
 
     const COLORS = [
-        '#3333FF',
-        '#3333CC',
-        '#333399',
-        '#3366CC',
-        '#336699',
-        '#3399FF',
-        '#3399CC',
-        '#66B2FF',
-        '#66B2CC',
-        '#66CCFF'
+        '#3333FFC4',
+        '#3333CCC4',
+        '#333399C4',
+        '#3366CCC4',
+        '#336699C4',
+        '#3399FFC4',
+        '#3399CCC4',
+        '#66B2FFC4',
+        '#66B2CCC4',
+        '#66CCFFC4'
     ];
 
     return <div style={{ height: 'calc(100vh - 250px)' }}>
