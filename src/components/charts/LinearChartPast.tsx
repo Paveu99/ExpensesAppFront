@@ -1,5 +1,14 @@
 import React, { useMemo } from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+    AreaChart,
+    XAxis,
+    YAxis,
+    Tooltip,
+    Legend,
+    ResponsiveContainer,
+    CartesianGrid,
+    Area
+} from 'recharts';
 import { ExpenseEntity } from 'types';
 
 interface GroupedExpenses {
@@ -21,8 +30,6 @@ export const LinearChartPast: React.FC<ExpenseChartProps> = ({ expensesGroupedBy
         'Sum [$]': memoizedData[year].reduce((total, expense) => total + expense.cost, 0),
     }));
 
-    console.log(data)
-
     const CustomTooltip = ({ active, payload, label }: any) => {
         if (active && payload && payload.length) {
             return (
@@ -39,13 +46,16 @@ export const LinearChartPast: React.FC<ExpenseChartProps> = ({ expensesGroupedBy
         <div style={{ height: 'calc(100vh - 250px)' }}>
             <h2>Money spent each year</h2>
             <ResponsiveContainer width="95%" height="100%" style={{ margin: "auto" }}>
-                <LineChart data={data}>
-                    <XAxis dataKey="year"/>
+                <AreaChart
+                    data={data}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="year" />
                     <YAxis />
-                    <Tooltip content={<CustomTooltip />} />
                     <Legend />
-                    <Line type="monotone" dataKey='Sum [$]' stroke="#3498db" label={{ fill: 'white', position: 'top' }} />
-                </LineChart>
+                    <Tooltip content={<CustomTooltip />} />
+                    <Area type="monotone" dataKey='Sum [$]' stroke="#3498db" label={{ fill: 'white', position: 'top' }} />
+                </AreaChart>
             </ResponsiveContainer>
         </div>
     );
