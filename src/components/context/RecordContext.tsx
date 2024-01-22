@@ -40,6 +40,7 @@ interface RecordContextProps {
     fetchMonthSummary: (year: string | undefined, month: string | undefined) => Promise<void>;
     allFutureRecords: ExpenseEntity[];
     groupedByDateFuture: ExpensesGroupedByDate;
+    groupedByYearFuture: GroupedExpenses,
     summaryFuture: Summary;
     fetchFutureRecords: () => Promise<void>;
 }
@@ -91,6 +92,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
     });
     const [allFutureRecords, setAllFutureRecords] = useState<ExpenseEntity[]>([]);
     const [groupedByDateFuture, setGroupedByDateFuture] = useState<ExpensesGroupedByDate>({});
+    const [groupedByYearFuture, setGroupedByYearFuture] = useState<GroupedExpenses>({});
     const [summaryFuture, setSummaryFuture] = useState<Summary>({
         sum: 0,
         categoryMost: '',
@@ -141,6 +143,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
             const data = await response.json();
             setAllFutureRecords(data.allExpenses);
             setGroupedByDateFuture(data.expensesGroupedByDate);
+            setGroupedByYearFuture(data.expensesGroupedByYear);
             setSummaryFuture(data.summary);
         } catch (error) {
             console.error('Error fetching records:', error);
@@ -156,6 +159,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         fetchYearSummary,
         fetchMonthSummary,
         expensesGroupedByYear,
+        groupedByYearFuture,
         allFutureRecords,
         groupedByDateFuture,
         summaryFuture,
