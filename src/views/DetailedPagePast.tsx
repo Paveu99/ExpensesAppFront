@@ -7,10 +7,11 @@ import el1 from "../components/styles/images/Calendar.png";
 import el2 from "../components/styles/images/Sum.png";
 import el3 from "../components/styles/images/Category.png";
 import el4 from "../components/styles/images/Back-arrow.png";
+import {ExpenseChart} from "../components/charts/ExpenseChart";
 
 
 export const DetailedPagePast = () => {
-    const {allRecords, summary, groupedByDate, fetchRecords } = useRecordContext();
+    const {allRecords, summary, groupedByDate, expensesGroupedByYear, fetchRecords } = useRecordContext();
 
     useEffect(() => {
     fetchRecords();
@@ -151,6 +152,9 @@ export const DetailedPagePast = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                <ExpenseChart expensesGroupedByYear={expensesGroupedByYear}/>
             </div>
         </div>
     );

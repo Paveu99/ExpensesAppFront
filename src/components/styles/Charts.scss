@@ -1,0 +1,112 @@
+.charts-view {
+  height: 100vh;
+  position: relative;
+  text-align: center;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.chart-choices {
+  &__past {
+    padding-bottom: 5px;
+    background-color: rgb(56, 56, 56);
+    display: flex;
+    flex-direction: row;
+    color: #3498db;
+    height: 60px;
+    width: 15%;
+    font-size: 40px;
+    transition: 500ms;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 10px;
+  }
+  &__past:hover {
+    transition: 500ms;
+    background-color: rgba(255, 255, 255, 0.44);
+    padding: 0px 10px 5px 10px;
+    cursor: pointer;
+  }
+  &__future {
+    background-color: rgb(56, 56, 56);
+    display: flex;
+    flex-direction: row;
+    color: rgba(213, 219, 52, 0.77);
+    height: 60px;
+    width: 15%;
+    font-size: 40px;
+    transition: 500ms;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 10px;
+    padding-bottom: 5px;
+  }
+  &__future:hover {
+    transition: 500ms;
+    background-color: rgba(255, 255, 255, 0.44);
+    padding: 0px 10px 5px 10px;
+    cursor: pointer;
+  }
+  &__past-chosen {
+    background-color: rgba(255, 255, 255, 0.44);
+    display: flex;
+    flex-direction: row;
+    color: #3498db;
+    height: 60px;
+    width: 15%;
+    font-size: 40px;
+    transition: 500ms;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 10px;
+    padding-bottom: 5px;
+  }
+  &__past-chosen:hover {
+    transition: 500ms;
+    background-color: rgba(255, 255, 255, 0.44);
+    padding: 0px 10px 5px 10px;
+    cursor: pointer;
+  }
+  &__future-chosen {
+    background-color: rgba(255, 255, 255, 0.44);
+    display: flex;
+    flex-direction: row;
+    color: rgba(213, 219, 52, 0.77);
+    height: 60px;
+    width: 15%;
+    font-size: 40px;
+    transition: 500ms;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 10px;
+    padding-bottom: 5px;
+  }
+  &__future-chosen:hover {
+    transition: 500ms;
+    background-color: rgba(255, 255, 255, 0.44);
+    padding: 0px 10px 5px 10px;
+    cursor: pointer;
+  }
+}
+
+.chart-view-past {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);;
+}

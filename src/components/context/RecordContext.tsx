@@ -24,9 +24,14 @@ interface ExpensesGroupedByDate {
     };
 }
 
+interface GroupedExpenses {
+    [year: string]: ExpenseEntity[];
+}
+
 interface RecordContextProps {
     allRecords: ExpenseEntity[];
     groupedByDate: ExpensesGroupedByDate;
+    expensesGroupedByYear: GroupedExpenses;
     summary: Summary;
     summaryYear: Summary;
     summaryMonth: SummaryMonth;
@@ -35,6 +40,7 @@ interface RecordContextProps {
     fetchMonthSummary: (year: string | undefined, month: string | undefined) => Promise<void>;
     allFutureRecords: ExpenseEntity[];
     groupedByDateFuture: ExpensesGroupedByDate;
+    groupedByYearFuture: GroupedExpenses,
     summaryFuture: Summary;
     fetchFutureRecords: () => Promise<void>;
 }
@@ -48,6 +54,7 @@ interface RecordProviderProps {
 export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
     const [allRecords, setAllRecords] = useState<ExpenseEntity[]>([]);
     const [groupedByDate, setGroupedByDate] = useState<ExpensesGroupedByDate>({});
+    const [expensesGroupedByYear, setExpensesGroupedByYear] = useState<GroupedExpenses>({});
     const [summary, setSummary] = useState<Summary>({
         sum: 0,
         categoryMost: '',
@@ -85,6 +92,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
     });
     const [allFutureRecords, setAllFutureRecords] = useState<ExpenseEntity[]>([]);
     const [groupedByDateFuture, setGroupedByDateFuture] = useState<ExpensesGroupedByDate>({});
+    const [groupedByYearFuture, setGroupedByYearFuture] = useState<GroupedExpenses>({});
     const [summaryFuture, setSummaryFuture] = useState<Summary>({
         sum: 0,
         categoryMost: '',
@@ -105,6 +113,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
             const data = await response.json();
             setAllRecords(data.allExpenses);
             setGroupedByDate(data.expensesGroupedByDate);
+            setExpensesGroupedByYear(data.expensesGroupedByYear);
             setSummary(data.summary);
         } catch (error) {
             console.error('Error fetching records:', error);
@@ -134,6 +143,7 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
             const data = await response.json();
             setAllFutureRecords(data.allExpenses);
             setGroupedByDateFuture(data.expensesGroupedByDate);
+            setGroupedByYearFuture(data.expensesGroupedByYear);
             setSummaryFuture(data.summary);
         } catch (error) {
             console.error('Error fetching records:', error);
@@ -148,6 +158,8 @@ export const RecordProvider: React.FC<RecordProviderProps> = ({ children }) => {
         fetchRecords,
         fetchYearSummary,
         fetchMonthSummary,
+        expensesGroupedByYear,
+        groupedByYearFuture,
         allFutureRecords,
         groupedByDateFuture,
         summaryFuture,

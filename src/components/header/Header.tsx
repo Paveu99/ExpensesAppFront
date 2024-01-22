@@ -5,6 +5,7 @@ import el1 from '../styles/images/Home.png';
 import el2 from '../styles/images/Info.png';
 import el3 from '../styles/images/Details.png';
 import el4 from '../styles/images/user.png';
+import el5 from '../styles/images/Charts.png';
 import {MouseGradientText} from "./Gradient";
 import {AddExpenseView} from "../../views/AddView";
 export const Header = () => {
@@ -38,6 +39,10 @@ export const Header = () => {
       <NavLink className="nav__link" style={styleOfLink} to="/details">
           <img className="small-icon" src={el3} alt=""/>
           <p className="text">Details</p>
+      </NavLink>
+      <NavLink className="nav__link" style={styleOfLink} to="/charts">
+          <img className="small-icon" src={el5} alt=""/>
+          <p className="text">Statistics</p>
       </NavLink>
       <button className="add-form-button" onClick={() => setOpenModal(true)}>+ New expense</button>
       <AddExpenseView isOpen={openModal} onClose={() => setOpenModal(false)}></AddExpenseView>
