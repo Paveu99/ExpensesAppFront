@@ -112,11 +112,6 @@ export const InfoPage = () => {
               </div>
           </AnimatedSlide>
       </SwiperSlide>
-        <SwiperSlide>
-            <AnimatedSlide>
-                Demo
-            </AnimatedSlide>
-        </SwiperSlide>
     </Swiper>
   </div>
 };
